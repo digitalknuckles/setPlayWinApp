@@ -38,7 +38,7 @@ Installation
 Clone the repository:
 bash
 Copy code
-git clone https://github.com/yourusername/SetPlayWinApp.git
+git clone https://github.com/digitalknuckles/SetPlayWinApp.git
 cd SetPlayWinApp
 Install dependencies:
 bash
@@ -69,8 +69,8 @@ Create a pull request.
 Support
 For questions, feedback, or collaboration, reach out to us:
 
-Email: support@setplaywinapp.com
-Discord: Join the Community
+Email: support@setplaywin.com
+Discord: Join the FunFart Games Community
 Website: SetPlayWinApp.com
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
