@@ -1,2 +1,3 @@
-// Placeholder for interactivity
-console.log("Welcome to SetPlayWinApp!");
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Welcome to SetPlayWin!');
+});
