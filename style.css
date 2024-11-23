@@ -5,6 +5,17 @@ body {
     color: #333;
     background: #f9f9f9;
 }
+#donate-button {
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#donate-button:hover {
+    background-color: #ffd633;
+}
 
 header {
     background: #4CAF50;
