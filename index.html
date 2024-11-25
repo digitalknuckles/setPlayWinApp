@@ -1,92 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SetPlayWinApp - The hub for FunFart Games, DigitalKnuckles, and LazerPixel Dev!">
-    <title>SetPlayWinApp</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-    <script src="script.js"></script>
-<body>
-    <header>
-        <div class="logo">
-            <h1>Guest House for FunFart Games</h1>
-        </div>
 
-    </header>
-<header>
-    <div class="logo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SetPlayWinApp</title>
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Favicon placeholder -->
+  <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+  <!-- Google Font for improved UI -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <div class="logo-section">
+      <img src="public/Set_Play_Win_logo_BW.png" alt="SetPlayWin logo" class="logo">
+      <div>
         <h1>SetPlayWinApp</h1>
         <p>Your Hub for Games, Web3, and Community</p>
+      </div>
     </div>
-    <nav>
+  </header>
+
+  <main id="tabs">
+    <menu class="tab-buttons">
+      <button class="active" data-tab="0">Overview</button>
+      <button data-tab="1">Key Features</button>
+      <button data-tab="2">Core Projects</button>
+      <button data-tab="3">Roadmap</button>
+      <button data-tab="4">Contact</button>
+      <button data-tab="5">Funfart Games</button>
+    </menu>
+
+    <div id="tab-content">
+      <div class="tab-section" id="section-0" style="background-image: url('public/setplaywin_Card0-01.png'); display: none;">
+        <h2>Overview</h2>
         <ul>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#projects">Core Projects</a></li>
-            <li><a href="#roadmap">Roadmap</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><button id="donate-button">Donate Crypto!</button></li>
+          <li>Welcome to SetPlayWinApp, the platform that brings together FunFart Games, DigitalKnuckles, and LazerPixel Dev.</li>
+          <li>Explore games, NFTs, tokens, and community utilities in one place!</li>
         </ul>
-    </nav>
-</header>
-    <main>
-        <section id="overview">
-            <h2>Overview</h2>
-            <p>Welcome to SetPlayWinApp, the platform that brings together FunFart Games, DigitalKnuckles, and LazerPixel Dev. Explore games, NFTs, tokens, and community utilities in one place!</p>
-        </section>
+      </div>
+      <div class="tab-section" id="section-1" style="background-image: url('public/setplaywin_Card4-01.png'); display: none;">
+        <h2>Key Features</h2>
+        <ul>
+          <li>Interactive Gaming Hub: Play and discover new games, track progress, and compete with others.</li>
+          <li>Web3 Integration: Experience blockchain-powered gaming, NFT trading, and token utilities.</li>
+          <li>Community-Driven Platform: Connect with enthusiasts, join events, and contribute to projects.</li>
+        </ul>
+      </div>
+      <div class="tab-section" id="section-2" style="background-image: url('public/setplaywin_Card3-01.png'); display: none;">
+        <h2>Core Projects</h2>
+        <ul>
+          <li>FunFart Games: Quirky and innovative games like SneakyPoot’s Adventures and Toothless Zoo Tycoon.</li>
+          <li>DigitalKnuckles: Exclusive NFTs and utilities to enhance your gaming experience.</li>
+          <li>LazerPixel Dev: Experimental projects, tutorials, and tools for game developers.</li>
+        </ul>
+      </div>
+      <div class="tab-section" id="section-3" style="background-image: url('public/setplaywin_Card2-01.png'); display: none;">
+        <h2>Roadmap</h2>
+        <ul>
+          <li>Phase 1: Launch the gaming hub and NFT marketplace.</li>
+          <li>Phase 2: Introduce token utilities and staking rewards.</li>
+          <li>Phase 3: Expand community features and co-op gaming modes.</li>
+          <li>Phase 4: Launch the SetPlayWin MemeCoin ecosystem.</li>
+        </ul>
+      </div>
+      <div class="tab-section" id="section-4" style="background-image: url('public/setplaywin_Card-01.png'); display: none;">
+        <h2>Contact</h2>
+        <ul>
+          <li>Email: setplaywin@gmail.com</li>
+          <li>Discord: Join the Community</li>
+          <li>Website: <a href="http://www.setplaywin.com" target="_blank">www.setplaywin.com</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  </div>
+      <div class="tab-section" id="section-5" style="background-image: url('public/setplaywin_Card5-01.png'); display: none;">
+        <h2>FunFart Games</h2>
+        <ul>
+          <li>Email: funfart85@gmail.com</li>
+          <li>Discord: Join the FunFart Games Community on Discord! </li>
+          <li>Website: <a href="http://www.funfartgames.com" target="_blank">www.funfartgames.com</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
 
-        <section id="features">
-            <h2>Key Features</h2>
-            <ul>
-                <li><strong>Interactive Gaming Hub:</strong> Play and discover new games, track progress, and compete with others.</li>
-                <li><strong>Web3 Integration:</strong> Experience blockchain-powered gaming, NFT trading, and token utilities.</li>
-                <li><strong>Community-Driven Platform:</strong> Connect with enthusiasts, join events, and contribute to projects.</li>
-            </ul>
-        </section>
+  <footer>
+    <p>&copy; 2024 SetPlayWin. All rights reserved.</p>
+  </footer>
 
-        <section id="projects">
-            <h2>Core Projects</h2>
-            <article>
-                <h3>FunFart Games</h3>
-                <p>Quirky and innovative games like <em>SneakyPoot’s Adventures</em> and <em>Toothless Zoo Tycoon</em>.</p>
-            </article>
-            <article>
-                <h3>DigitalKnuckles</h3>
-                <p>Exclusive NFTs and utilities to enhance your gaming experience.</p>
-            </article>
-            <article>
-                <h3>LazerPixel Dev</h3>
-                <p>Experimental projects, tutorials, and tools for game developers.</p>
-            </article>
-        </section>
-
-        <section id="roadmap">
-            <h2>Roadmap</h2>
-            <ul>
-                <li><strong>Phase 1:</strong> Launch the gaming hub and NFT marketplace.</li>
-                <li><strong>Phase 2:</strong> Introduce token utilities and staking rewards.</li>
-                <li><strong>Phase 3:</strong> Expand community features and co-op gaming modes.</li>
-                <li><strong>Phase 4:</strong> Launch the SetPlayWin MemeCoin ecosystem.</li>
-            </ul>
-        </section>
-
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Have questions or feedback? Reach out to us:</p>
-            <ul>
-                <li>Email: <a href="mailto:support@setplaywinapp.com">support@setplaywinapp.com</a></li>
-                <li>Discord: <a href="https://discord.gg/example" target="_blank">Join the Community</a></li>
-                <li>Website: <a href="https://www.setplaywinapp.com" target="_blank">SetPlayWinApp.com</a></li>
-            </ul>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 SetPlayWinApp. All Rights Reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
