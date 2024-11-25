@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   // Select buttons and tab sections
   const buttons = document.querySelectorAll("menu button");
@@ -6,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Define background images for sections
   const backgrounds = [
-    
     "setplaywin_Card0-01.png",
     "setplaywin_Card4-01.png",
     "setplaywin_Card3-01.png",
@@ -35,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         section.style.backgroundImage = `url('${backgrounds[idx]}')`;
         section.style.backgroundSize = "cover";
         section.style.backgroundPosition = "center";
-        console.log(`Background image applied: ${backgrounds[idx]}`);
+        section.style.backgroundRepeat = "no-repeat";
       }
     });
   };
