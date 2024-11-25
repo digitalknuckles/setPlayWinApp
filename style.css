@@ -2,10 +2,10 @@
 :root {
   --primary-color: #007acc;
   --secondary-color: #4caf50;
-  --background-color: #251e1e;
-  --text-color: #333;
-  --button-bg: #eee;
-  --button-hover: #ddd;
+  --background-color: #333333; /* Dark gray background */
+  --text-color: #ffffff; /* Light text for contrast */
+  --button-bg: #444444;
+  --button-hover: #555555;
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -16,161 +16,127 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-header.app-header {
+/* Header Styling */
+header {
   background: #282c34;
-  color: white;
-  padding: 1rem 2rem;
+  color: var(--text-color);
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 60px;
-  height: 60px;
-  margin-right: 1rem;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 header h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 header p {
   margin: 0;
-  font-size: 1rem;
-  color: #ccc;
+  font-size: 0.9rem;
+  color: #bbbbbb;
 }
 
-main {
-  margin: 2rem auto;
-  max-width: 1200px;
-  padding: 0 1rem;
+/* Footer Styling */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #282c34;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  margin-top: auto;
 }
 
 /* Tab Buttons */
-menu.tab-buttons {
+menu {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
 }
 
-menu.tab-buttons button {
-  padding: 0.8rem 1.5rem;
+menu button {
+  padding: 0.8rem 1.2rem;
   border: none;
   border-radius: 5px;
   background-color: var(--button-bg);
   color: var(--text-color);
   cursor: pointer;
   font-size: 1rem;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease, color 0.3s ease;
   box-shadow: 0 2px 4px var(--shadow-color);
 }
 
-menu.tab-buttons button:hover {
+menu button:hover {
   background-color: var(--button-hover);
 }
 
-menu.tab-buttons button.active {
+menu button.active {
   background-color: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 6px var(--shadow-color);
 }
 
-menu.tab-buttons button:focus {
-  outline: 2px solid var(--secondary-color);
-}
-
-/* Tab Content Sections */
+/* Tab Content Styling */
 .tab-section {
   display: none;
-  padding: 2rem;
-  background-size: cover;
-  background-position: center;
-  border-radius: 5px;
-  color: white;
-  text-shadow: 1px 1px 3px #000;
-  min-height: 300px;
+  background: #444444;
+  color: var(--text-color);
+  padding: 1.5rem;
+  border-radius: 8px;
   box-shadow: 0 4px 6px var(--shadow-color);
+  min-height: 300px; /* Consistent height */
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.tab-section.active {
+  display: block;
 }
 
 .tab-section h2 {
-  margin-top: 0;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
 }
 
-.tab-section ul {
-  margin: 1rem 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tab-section ul li {
-  margin-bottom: 0.5rem;
-  padding-left: 1rem;
-  position: relative;
-}
-
-.tab-section ul li:before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: var(--secondary-color);
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #282c34;
-  color: white;
-  font-size: 0.9rem;
+.tab-section p {
+  margin: 0 0 1rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  header.app-header {
+  header {
     flex-direction: column;
-    align-items: center;
     text-align: center;
   }
 
-  .logo {
-    margin-bottom: 1rem;
-  }
-
-  menu.tab-buttons {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  menu.tab-buttons button {
-    font-size: 0.9rem;
+  menu button {
     padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 
   .tab-section {
-    padding: 1.5rem;
+    padding: 1rem;
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  menu.tab-buttons button {
+  menu button {
     width: 100%;
   }
 
   .tab-section {
+    padding: 0.8rem;
     font-size: 0.8rem;
   }
 }
