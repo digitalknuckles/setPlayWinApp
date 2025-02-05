@@ -1,142 +1,173 @@
 /* General Styles */
+/* General Styles */
 :root {
   --primary-color: #007acc;
   --secondary-color: #4caf50;
-  --background-color: #333333; /* Dark gray background */
-  --text-color: #ffffff; /* Light text for contrast */
-  --button-bg: #444444;
-  --button-hover: #555555;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --button-bg: #eee;
+  --button-hover: #ddd;
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
+* {
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Header Styling */
-header {
-  background: #282c34;
-  color: var(--text-color);
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 4px var(--shadow-color);
-  width: 100%;
   box-sizing: border-box;
 }
 
+html, body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header.app-header {
+  background: #282c34;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-right: 1rem;
+}
+
 header h1 {
-  margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
 header p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #bbbbbb;
+  font-size: 1rem;
+  color: #ccc;
 }
 
-/* Footer Styling */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #282c34;
-  color: var(--text-color);
-  font-size: 0.9rem;
-  margin-top: auto;
+/* Main Content */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 160px); /* Adjust based on header & footer height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Tab Buttons */
-menu {
+/* Tab Navigation */
+menu.tab-buttons {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin: 1rem 0;
+  padding: 1rem;
+  width: 100%;
   flex-wrap: wrap;
 }
 
-menu button {
-  padding: 0.8rem 1.2rem;
+menu.tab-buttons button {
+  padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 5px;
   background-color: var(--button-bg);
   color: var(--text-color);
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease-in-out;
   box-shadow: 0 2px 4px var(--shadow-color);
 }
 
-menu button:hover {
+menu.tab-buttons button:hover {
   background-color: var(--button-hover);
 }
 
-menu button.active {
+menu.tab-buttons button.active {
   background-color: var(--primary-color);
   color: white;
+  box-shadow: 0 4px 6px var(--shadow-color);
 }
 
-/* Tab Content Styling */
+/* Tab Content Sections */
+#tab-content {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .tab-section {
   display: none;
-  background: #444444;
-  color: var(--text-color);
-  padding: 1.5rem;
-  border-radius: 8px;
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  padding: 2rem;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-shadow: 1px 1px 3px #000;
   box-shadow: 0 4px 6px var(--shadow-color);
-  min-height: 300px; /* Consistent height */
-  max-width: 800px;
-  margin: 0 auto;
-  box-sizing: border-box;
+  min-height: 100vh;
 }
 
-.tab-section.active {
-  display: block;
-}
-
-.tab-section h2 {
-  margin: 0 0 1rem;
-  font-size: 1.5rem;
-}
-
-.tab-section p {
-  margin: 0 0 1rem;
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #282c34;
+  color: white;
+  font-size: 0.9rem;
+  width: 100%;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  header {
+  header.app-header {
     flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 
-  menu button {
-    padding: 0.6rem 1rem;
+  .logo {
+    margin-bottom: 1rem;
+  }
+
+  menu.tab-buttons {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  menu.tab-buttons button {
     font-size: 0.9rem;
+    padding: 0.6rem 1rem;
   }
 
   .tab-section {
-    padding: 1rem;
+    padding: 1.5rem;
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  menu button {
+  menu.tab-buttons button {
     width: 100%;
   }
 
   .tab-section {
-    padding: 0.8rem;
     font-size: 0.8rem;
   }
 }
