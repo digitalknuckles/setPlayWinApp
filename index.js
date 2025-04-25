@@ -1,3 +1,12 @@
+// Import React and ReactDOM to render the React app
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App'; // Assuming your App component is in App.js
+
+// Import PrizeGrabEmbed component (you already did this part)
+import PrizeGrabEmbed from './components/PrizeGrabEmbed';
+
+// Vanilla JavaScript to handle tab functionality
 document.addEventListener("DOMContentLoaded", () => {
   // Select buttons and tab sections
   const buttons = document.querySelectorAll("menu button");
@@ -46,3 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize the first tab on page load
   activateTab(0);
 });
+
+// Render React app into the DOM
+ReactDOM.render(<App />, document.getElementById('root')); // 'root' is the target container in your HTML
