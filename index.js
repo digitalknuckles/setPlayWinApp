@@ -4,7 +4,7 @@
 //import App from './App'; // Assuming your App component is in App.js
 
 // Import PrizeGrabEmbed component (you already did this part)
-import PrizeGrabEmbed from './components/PrizeGrabEmbed';
+//import PrizeGrabEmbed from './components/PrizeGrabEmbed';
 
 // Vanilla JavaScript to handle tab functionality
 document.addEventListener("DOMContentLoaded", () => {
