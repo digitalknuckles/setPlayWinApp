@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 //import App from './src/App'; // Assuming your App component is in App.js
 
 // Import PrizeGrabEmbed component (you already did this part)
-import PrizeGrabEmbed from '.docs/src/components/PrizeGrabEmbed';
-import CyberPetsAiTrainerEmbed from '.docs/src/components/CyberPetsAiTrainerEmbed';
+import PrizeGrabEmbed from './docs/src/components/PrizeGrabEmbed';
+import CyberPetsAiTrainerEmbed from './docs/src/components/CyberPetsAiTrainerEmbed';
 
 // Vanilla JavaScript to handle tab functionality
 document.addEventListener("DOMContentLoaded", () => {
