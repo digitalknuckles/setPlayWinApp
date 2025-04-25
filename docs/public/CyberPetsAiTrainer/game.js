@@ -122,7 +122,7 @@ function capitalize(str) {
 
 let showStartMenu = true;
 const startMenuImage = new Image();
-startMenuImage.src = ".docs/public/CyberPetsAiTrainer/startMenu.png";
+startMenuImage.src = "./startMenu.png";
 
 let gameStarted = false;
 let allowInput = false;
