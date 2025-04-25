@@ -1,4 +1,4 @@
-import { mintPrize } from './docs/public/CyberPetsAiTrainer/walletconnect.js';
+import { mintPrize } from './public/CyberPetsAiTrainer/walletconnect.js';
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
