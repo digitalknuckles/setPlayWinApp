@@ -18,7 +18,7 @@ const providerOptions = {
   }
 };
 
-const web3Modal = new window.Web3Modal.default({
+const web3Modal = new window.Web3Modal({
   cacheProvider: true,
   providerOptions,
   theme: "light",
