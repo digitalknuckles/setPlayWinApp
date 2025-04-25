@@ -1,18 +1,18 @@
-import { mintPrize } from './walletconnect.js';
+import { mintPrize } from '.docs/public/CyberPetsAiTrainer/walletconnect.js';
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const petSprites = [
-  "./RobotTeddyAi.png",
-  "./RobotTeddyAi0.png",
+  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi.png",
+  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi0.png",
   //"./RobotTeddyAi1.png",
-  "./RobotTeddyAi2.png",
-  "./RobotTeddyAi3.png", // You can keep duplicates for weighting
-  "./RobotTeddyAi4.png",
-  "./RobotTeddyAi5.png",
-  "./RobotTeddyAi6.png",
-  "./RobotTeddyAi7.png"
+  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi2.png",
+  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi3.png", // You can keep duplicates for weighting
+  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi4.png",
+  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi5.png",
+  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi6.png",
+  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi7.png"
   //"./RobotTeddyAi8.png"
 ];
 
@@ -122,7 +122,7 @@ function capitalize(str) {
 
 let showStartMenu = true;
 const startMenuImage = new Image();
-startMenuImage.src = "./startMenu.png";
+startMenuImage.src = ".docs/public/CyberPetsAiTrainer/startMenu.png";
 
 let gameStarted = false;
 let allowInput = false;
