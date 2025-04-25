@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 
 // Import PrizeGrabEmbed component (you already did this part)
 import PrizeGrabEmbed from '.docs/src/components/PrizeGrabEmbed';
+import CyberPetsAiTrainerEmbed from '.docs/src/components/CyberPetsAiTrainerEmbed';
 
 // Vanilla JavaScript to handle tab functionality
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Define background images for sections
   const backgrounds = [
-    "setplaywin_Card0-01.png",
-    "setplaywin_Card4-01.png",
-    "setplaywin_Card3-01.png",
-    "setplaywin_Card2-01.png",
-    "setplaywin_Card-01.png",
-    "setplaywin_Card5-01.png",
+    ".docs/setplaywin_Card0-01.png",
+    ".docs/setplaywin_Card4-01.png",
+    ".docs/setplaywin_Card3-01.png",
+    ".docs/setplaywin_Card2-01.png",
+    ".docs/setplaywin_Card-01.png",
+    ".docs/setplaywin_Card5-01.png",
   ];
 
   /**
