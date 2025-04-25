@@ -280,6 +280,9 @@ function create() {
     });
   }
 </script>
-<script src="walletconnect.js"></script>
+<script type="module">
+  import { mintPrizeNFT } from './prizeGrab/walletconnect.js';
+  // now mintPrizeNFT is scoped locally, not global
+</script>
 </body>
 </html>
