@@ -1,1 +1,69 @@
-Ly8gd2FsbGV0Y29ubmVjdC5qcwoKY29uc3QgcHJvamVjdElkID0gIjE1ZGEzYzQzMWE3NGIyOWVkYjYzMTk4YTUwM2Q0NWI1IjsKCmNvbnN0IG1ldGFkYXRhID0gewogIG5hbWU6ICJGdW5GYXJ0IEdyYWIiLAogIGRlc2NyaXB0aW9uOiAiTWludCBORlRzIGFmdGVyIHdpbm5pbmcgdGhlIGdhbWUhIiwKICB1cmw6ICJodHRwczovL2RpZ2l0YWxrbnVja2xlcy5naXRodWIuaW8vcHJpemVHcmFiLyIsCiAgaWNvbnM6IFsiaHR0cHM6Ly9kaWdpdGFsa251Y2tsZXMuZ2l0aHViLmlvL3ByaXplR3JhYi9pY29uLnBuZyJdCn07Cgpjb25zdCBwcm92aWRlck9wdGlvbnMgPSB7CiAgd2FsbGV0Y29ubmVjdDogewogICAgcGFja2FnZTogd2luZG93LldhbGxldENvbm5lY3RQcm92aWRlci5kZWZhdWx0LAogICAgb3B0aW9uczogewogICAgICBpbmZ1cmFJZDogcHJvamVjdElkCiAgICB9CiAgfQp9OwoKY29uc3Qgd2ViM01vZGFsID0gbmV3IHdpbmRvdy5XZWIzTW9kYWwuZGVmYXVsdCh7CiAgY2FjaGVQcm92aWRlcjogdHJ1ZSwKICBwcm92aWRlck9wdGlvbnMsCiAgdGhlbWU6ICJsaWdodCIsCiAgbWV0YWRhdGEKfSk7Cgp3aW5kb3cuY29ubmVjdFdhbGxldCA9IGFzeW5jIGZ1bmN0aW9uICgpIHsKICB0cnkgewogICAgY29uc3QgcHJvdmlkZXIgPSBhd2FpdCB3ZWIzTW9kYWwuY29ubmVjdCgpOwogICAgY29uc3Qgd2ViM1Byb3ZpZGVyID0gbmV3IHdpbmRvdy5ldGhlcnMucHJvdmlkZXJzLldlYjNQcm92aWRlcihwcm92aWRlcik7CiAgICBjb25zdCBzaWduZXIgPSB3ZWIzUHJvdmlkZXIuZ2V0U2lnbmVyKCk7CiAgICBjb25zdCBhZGRyZXNzID0gYXdhaXQgc2lnbmVyLmdldEFkZHJlc3MoKTsKICAgIGNvbnNvbGUubG9nKCLwn5SMIFdhbGxldCBjb25uZWN0ZWQ6IiwgYWRkcmVzcyk7CiAgICByZXR1cm4geyBwcm92aWRlcjogd2ViM1Byb3ZpZGVyLCBzaWduZXIsIGFkZHJlc3MgfTsKICB9IGNhdGNoIChlcnIpIHsKICAgIGNvbnNvbGUuZXJyb3IoIuKdjCBXYWxsZXQgY29ubmVjdGlvbiBmYWlsZWQ6IiwgZXJyKTsKICAgIGFsZXJ0KCLinYwgRmFpbGVkIHRvIGNvbm5lY3Qgd2FsbGV0OiAiICsgKGVyci5tZXNzYWdlIHx8IGVycikpOwogICAgcmV0dXJuIG51bGw7CiAgfQp9OwoKd2luZG93Lm1pbnRQcml6ZU5GVCA9IGFzeW5jIGZ1bmN0aW9uICgpIHsKICBjb25zdCB3YWxsZXQgPSBhd2FpdCB3aW5kb3cuY29ubmVjdFdhbGxldCgpOwogIGlmICghd2FsbGV0KSByZXR1cm47CgogIHRyeSB7CiAgICBjb25zdCBjb250cmFjdCA9IG5ldyB3aW5kb3cuZXRoZXJzLkNvbnRyYWN0KAogICAgICAiMHhjYUI1NDNGNkFmMzY1YTlFNzVmNTZlN0ZjODVEOUM4NEYxNDgyQjEyIiwKICAgICAgWwogICAgICAgIHsKICAgICAgICAgIGlucHV0czogW10sCiAgICAgICAgICBuYW1lOiAibWludFByaXplIiwKICAgICAgICAgIG91dHB1dHM6IFtdLAogICAgICAgICAgc3RhdGVNdXRhYmlsaXR5OiAibm9ucGF5YWJsZSIsCiAgICAgICAgICB0eXBlOiAiZnVuY3Rpb24iCiAgICAgICAgfQogICAgICBdLAogICAgICB3YWxsZXQuc2lnbmVyCiAgICApOwoKICAgIGNvbnN0IHR4ID0gYXdhaXQgY29udHJhY3QubWludFByaXplKCk7CiAgICBhd2FpdCB0eC53YWl0KCk7CiAgICBhbGVydCgi8J-OiSBORlQgTWludGVkIFN1Y2Nlc3NmdWxseSEiKTsKICB9IGNhdGNoIChlcnIpIHsKICAgIGNvbnNvbGUuZXJyb3IoIuKdjCBNaW50aW5nIGZhaWxlZDoiLCBlcnIpOwogICAgYWxlcnQoIuKdjCBNaW50aW5nIGZhaWxlZDogIiArIChlcnIucmVhc29uIHx8IGVyci5tZXNzYWdlIHx8IGVycikpOwogIH0KfTs
+// walletconnect.js
+
+const projectId = "15da3c431a74b29edb63198a503d45b5";
+
+const metadata = {
+  name: "FunFart Grab",
+  description: "Mint NFTs after winning the game!",
+  url: "https://digitalknuckles.github.io/prizeGrab/",
+  icons: ["https://digitalknuckles.github.io/prizeGrab/icon.png"]
+};
+
+const providerOptions = {
+  walletconnect: {
+    package: window.WalletConnectProvider.default,
+    options: {
+      infuraId: projectId
+    }
+  }
+};
+
+const web3Modal = new window.Web3Modal.default({
+  cacheProvider: true,
+  providerOptions,
+  theme: "light",
+  metadata
+});
+
+window.connectWallet = async function () {
+  try {
+    const provider = await web3Modal.connect();
+    const web3Provider = new window.ethers.providers.Web3Provider(provider);
+    const signer = web3Provider.getSigner();
+    const address = await signer.getAddress();
+    console.log("🔌 Wallet connected:", address);
+    return { provider: web3Provider, signer, address };
+  } catch (err) {
+    console.error("❌ Wallet connection failed:", err);
+    alert("❌ Failed to connect wallet: " + (err.message || err));
+    return null;
+  }
+};
+
+window.mintPrizeNFT = async function () {
+  const wallet = await window.connectWallet();
+  if (!wallet) return;
+
+  try {
+    const contract = new window.ethers.Contract(
+      "0xcaB543F6Af365a9E75f56e7Fc85D9C84F1482B12",
+      [
+        {
+          inputs: [],
+          name: "mintPrize",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function"
+        }
+      ],
+      wallet.signer
+    );
+
+    const tx = await contract.mintPrize();
+    await tx.wait();
+    alert("🎉 NFT Minted Successfully!");
+  } catch (err) {
+    console.error("❌ Minting failed:", err);
+    alert("❌ Minting failed: " + (err.reason || err.message || err));
+  }
+};
