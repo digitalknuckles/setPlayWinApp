@@ -1,3 +1,5 @@
+// src/components/PrizeGrabEmbed.jsx
+
 import React from 'react';
 
 const PrizeGrabEmbed = () => (
