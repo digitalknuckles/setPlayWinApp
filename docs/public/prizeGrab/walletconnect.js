@@ -11,7 +11,7 @@ const metadata = {
 
 const providerOptions = {
   walletconnect: {
-    package: window.WalletConnectProvider.default,
+    package: window.WalletConnectProvider,
     options: {
       infuraId: projectId
     }
