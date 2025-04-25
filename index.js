@@ -57,4 +57,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Render React app into the DOM
-ReactDOM.render(<App />, document.getElementById('root')); // 'root' is the target container in your HTML
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
