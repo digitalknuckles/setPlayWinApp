@@ -4,15 +4,15 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const petSprites = [
-  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi.png",
-  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi0.png",
+  "./RobotTeddyAi.png",
+  "./RobotTeddyAi0.png",
   //"./RobotTeddyAi1.png",
-  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi2.png",
-  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi3.png", // You can keep duplicates for weighting
-  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi4.png",
-  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi5.png",
-  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi6.png",
-  ".docs/public/CyberPetsAiTrainer/RobotTeddyAi7.png"
+  "./RobotTeddyAi2.png",
+  "./RobotTeddyAi3.png", // You can keep duplicates for weighting
+  "./RobotTeddyAi4.png",
+  "./RobotTeddyAi5.png",
+  "./RobotTeddyAi6.png",
+  "./RobotTeddyAi7.png"
   //"./RobotTeddyAi8.png"
 ];
 
