@@ -1,9 +1,8 @@
 // Import React and ReactDOM to render the React app
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-//import App from './src/App'; // Assuming your App component is in App.js
 
-// Import PrizeGrabEmbed component (you already did this part)
+// Import PrizeGrabEmbed component
 import PrizeGrabEmbed from './src/components/PrizeGrabEmbed';
 import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed';
 
@@ -55,14 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize the first tab on page load
   activateTab(0);
-});
 
-// Render React imports into the DOM
-root.render(
-  <React.StrictMode>
-    <div>
-      <PrizeGrabEmbed />
-      <CyberPetsAiTrainerEmbed />
-    </div>
-  </React.StrictMode>
-);
+  // Render React components into the DOM after tab functionality is loaded
+  const root = createRoot(document.getElementById('root')); // Ensure 'root' exists in your HTML
+  root.render(
+    <React.StrictMode>
+      <div>
+        <PrizeGrabEmbed />
+        <CyberPetsAiTrainerEmbed />
+      </div>
+    </React.StrictMode>
+  );
+});
