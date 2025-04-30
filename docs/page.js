@@ -13,15 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".tab-section");
 
   // Define background images for sections
-  const backgrounds = [
-    ".docs/setplaywin_Card0-01.png",
-    ".docs/setplaywin_Card4-01.png",
-    ".docs/setplaywin_Card3-01.png",
-    ".docs/setplaywin_Card2-01.png",
-    ".docs/setplaywin_Card-01.png",
-    ".docs/setplaywin_Card5-01.png",
-  ];
-
+const backgrounds = [
+  "setplaywin_Card0-01.png",
+  "setplaywin_Card4-01.png",
+  "setplaywin_Card3-01.png",
+  "setplaywin_Card2-01.png",
+  "setplaywin_Card-01.png",
+  "setplaywin_Card5-01.png",
+];
   /**
    * Activates a specific tab by index
    * @param {number} tabIndex - Index of the tab to activate
@@ -56,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   activateTab(0);
 
   // Render React components into the DOM after tab functionality is loaded
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById("root");
 
 root.render(
   React.createElement(React.StrictMode, null,
