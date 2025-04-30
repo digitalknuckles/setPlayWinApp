@@ -56,13 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
   activateTab(0);
 
   // Render React components into the DOM after tab functionality is loaded
-  const root = createRoot(document.getElementById('root')); // Ensure 'root' exists in your HTML
-  root.render(
-    <React.StrictMode>
-      <div>
-        <PrizeGrabEmbed />
-        <CyberPetsAiTrainerEmbed />
-      </div>
-    </React.StrictMode>
-  );
-});
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+  React.createElement(React.StrictMode, null,
+    React.createElement('div', null,
+      React.createElement(PrizeGrabEmbed),
+      React.createElement(CyberPetsAiTrainerEmbed)
+    )
+  )
+);
