@@ -1,6 +1,6 @@
 // Import React and ReactDOM to render the React app
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 //import App from './src/App'; // Assuming your App component is in App.js
 
 // Import PrizeGrabEmbed component (you already did this part)
