@@ -57,6 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
   activateTab(0);
 });
 
-// Render React app into the DOM
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+// Render React imports into the DOM
+root.render(
+  <React.StrictMode>
+    <div>
+      <PrizeGrabEmbed />
+      <CyberPetsAiTrainerEmbed />
+    </div>
+  </React.StrictMode>
+);
