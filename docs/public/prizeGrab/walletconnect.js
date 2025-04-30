@@ -1,5 +1,5 @@
 // walletconnect.js
-
+export function mintPrizeNFT() {
 const projectId = "15da3c431a74b29edb63198a503d45b5";
 
 const metadata = {
@@ -67,3 +67,4 @@ window.mintPrizeNFT = async function () {
     alert("❌ Minting failed: " + (err.reason || err.message || err));
   }
 };
+}
