@@ -60,11 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize the first tab on page load
   activateTab(0);
 
-  // Render React components into the DOM after tab functionality is loaded
-  //root.render(
-   // React.createElement('div', null,
-    //  React.createElement(PrizeGrabEmbed),
-    //  React.createElement(CyberPetsAiTrainerEmbed)
-  //  )
-  //);
+   //Render React components into the DOM after tab functionality is loaded
+  root.render(
+    React.createElement('div', null,
+      React.createElement(PrizeGrabEmbed),
+     React.createElement(CyberPetsAiTrainerEmbed)
+    )
+  );
 });
