@@ -175,7 +175,21 @@
   // Trigger after DOM is fully loaded
   window.addEventListener("DOMContentLoaded", checkSession);
 </script>
-  
+  <script type="module">
+  import React from 'https://esm.sh/react';
+  import ReactDOM from 'https://esm.sh/react-dom/client';
+  import PrizeGrabEmbed from './src/components/PrizeGrabEmbed.js';
+  import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed.js';
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+
+  root.render(
+    React.createElement('div', null,
+      React.createElement(PrizeGrabEmbed),
+      React.createElement(CyberPetsAiTrainerEmbed)
+    )
+  );
+</script>
   <!--<script type="module" src="/page.js"></script>-->
 </body>
 
