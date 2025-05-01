@@ -102,26 +102,19 @@ menu.tab-buttons button.active {
   box-shadow: 0 4px 6px var(--shadow-color);
 }
 
-/* Tab Content Sections */
-#tab-content {
-  flex-grow: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+/* Optional: Tab section styles to complement button styles */
+.tab-section {
+  display: none; /* Hide all sections by default */
+  transition: opacity 0.3s ease-in-out; /* Smooth fade transition when switching tabs */
 }
 
-.tab-section {
-  display: none;
-  flex-grow: 1;
-  height: 100%;
-  width: 100%;
-  padding: 2rem;
-  background-size: cover;
-  background-position: center;
-  color: white;
-  text-shadow: 1px 1px 3px #000;
-  box-shadow: 0 4px 6px var(--shadow-color);
-  min-height: 100vh;
+.tab-section.active {
+  display: block; /* Show the active section */
+  opacity: 1; /* Fully visible for active section */
+}
+
+.tab-section:not(.active) {
+  opacity: 0; /* Faded out for inactive sections */
 }
 
 /* Footer */
