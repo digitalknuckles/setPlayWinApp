@@ -1,7 +1,7 @@
 // Import React and ReactDOM to render the React app
 import ReactDOM from 'react-dom/client';
-//import PrizeGrabEmbed from './src/components/PrizeGrabEmbed';
-//import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed';
+import PrizeGrabEmbed from './src/components/PrizeGrabEmbed';
+import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed';
 
 // Initialize the root for React
 const root = ReactDOM.createRoot(document.getElementById('root'));
