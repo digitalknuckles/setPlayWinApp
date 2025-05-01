@@ -70,6 +70,5 @@ root.render(
       React.createElement(PrizeGrabEmbed),
       React.createElement(CyberPetsAiTrainerEmbed)
     )
-  )
-);
+  );
 });
