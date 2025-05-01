@@ -7,7 +7,6 @@ const root = createRoot(document.getElementById('root'));
 import PrizeGrabEmbed from './src/components/PrizeGrabEmbed';
 import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed';
 
-// Vanilla JavaScript to handle tab functionality
 document.addEventListener("DOMContentLoaded", () => {
   // Select buttons and tab sections
   const buttons = document.querySelectorAll("menu button");
@@ -28,15 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
    * @param {number} tabIndex - Index of the tab to activate
    */
   const activateTab = (tabIndex) => {
+    // Set the active button
     buttons.forEach((button, idx) => {
       const isActive = idx === tabIndex;
       button.classList.toggle("active", isActive);
       button.setAttribute("aria-selected", isActive);
     });
 
+    // Set the active section
     sections.forEach((section, idx) => {
       const isActive = idx === tabIndex;
-      section.style.display = isActive ? "block" : "none";
+      section.classList.toggle("active", isActive); // Use class to toggle visibility
 
       // Set background image for the active section
       if (isActive) {
@@ -55,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize the first tab on page load
   activateTab(0);
+});
 
   // Render React components into the DOM after tab functionality is loaded
 const root = ReactDOM.createRoot(document.getElementById('root'));
