@@ -93,23 +93,43 @@
       </div>
       <div class="tab-section" id="section-5" style="background-image: url('./setplaywin_Card5-01.png');">
                 <h2>FunFart Games</h2>
-<iframe 
-  src="./public/prizeGrab/index.html"
-  width="100%" 
-  height="600px" 
-  style="border: none; border-radius: 12px;" 
-  title="PrizeGrab Game"
-  id="prizeGrabIframe">
-</iframe>
+<!-- PrizeGrab Game Embed -->
+<div style="text-align: center;">
+  <!-- Button to start the game -->
+  <button onclick="startGame()" style="padding: 10px 20px; font-size: 16px;">
+    Start Game
+  </button>
 
-<iframe 
-  src="./public/CyberPetsAiTrainer/index.html"
-  width="100%" 
-  height="600px" 
-  style="border: none; border-radius: 12px;" 
-  title="CyberPets Ai Trainer"
-  id="CyberPetsAiTrainerIframe">
-</iframe>
+  <!-- iframe will appear after clicking the button -->
+  <div id="game-container" style="display: none; width: 100%; height: 600px; max-width: 800px; margin: 20px auto;">
+    <iframe
+      src="public/prizeGrab/index.html"
+      title="PrizeGrab Game"
+      width="100%"
+      height="100%"
+      style="border: none; border-radius: 8px;"
+    ></iframe>
+  </div>
+</div>
+
+<!-- CyberPets Ai Trainer Embed -->
+<div style="text-align: center;">
+  <!-- Button to start the game -->
+  <button onclick="startAiTrainerGame()" style="padding: 10px 20px; font-size: 16px;">
+    Start Game
+  </button>
+
+  <!-- iframe will appear after clicking the button -->
+  <div id="ai-trainer-container" style="display: none; width: 100%; height: 600px; max-width: 800px; margin: 20px auto;">
+    <iframe
+      src="public/CyberPetsAiTrainer/index.html"
+      title="CyberPets Ai Trainer"
+      width="100%"
+      height="100%"
+      style="border: none; border-radius: 8px;"
+    ></iframe>
+  </div>
+</div>
         <h2>FunFart Games Info</h2>
         <ul>
           <li>Email: funfart85@gmail.com</li>
@@ -123,6 +143,19 @@
   <footer>
     <p>&copy; 2024 SetPlayWin. All rights reserved.</p>
   </footer>
+     
+<script>
+  // Function to display the iframe when the "Start Game" button is clicked
+  function startGame() {
+    document.querySelector('button').style.display = 'none'; // Hide the start button
+    document.getElementById('game-container').style.display = 'block'; // Show the iframe
+  }
+  // Function to display the iframe when the "Start Game" button is clicked
+  function startAiTrainerGame() {
+    document.querySelector('button').style.display = 'none'; // Hide the start button
+    document.getElementById('ai-trainer-container').style.display = 'block'; // Show the iframe
+  }
+</script>
    <!-- <script>
   const tabButtons = document.querySelectorAll(".tab-buttons button");
   const tabSections = document.querySelectorAll(".tab-section");
