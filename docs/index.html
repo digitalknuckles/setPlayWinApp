@@ -122,6 +122,28 @@
   <footer>
     <p>&copy; 2024 SetPlayWin. All rights reserved.</p>
   </footer>
+    <script>
+  const tabButtons = document.querySelectorAll(".tab-buttons button");
+  const tabSections = document.querySelectorAll(".tab-section");
+  const footer = document.querySelector("footer");
+
+  tabButtons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      document.querySelector(".tab-buttons .active").classList.remove("active");
+      btn.classList.add("active");
+
+      document.querySelector(".tab-section.active").classList.remove("active");
+      tabSections[index].classList.add("active");
+
+      // Hide footer on FunFart Games (index 5)
+      if (index === 5) {
+        footer.style.display = "none";
+      } else {
+        footer.style.display = "block";
+      }
+    });
+  });
+</script>
       <!-- Token gate script-->
 <script>
   const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
