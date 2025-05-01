@@ -9,7 +9,7 @@ import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed';
 
 document.addEventListener("DOMContentLoaded", () => {
   // Select buttons and tab sections
-  const buttons = document.querySelectorAll("menu button");
+  const buttons = document.querySelectorAll("menu.tab-buttons button");  // Ensure correct element selection
   const sections = document.querySelectorAll(".tab-section");
 
   // Define background images for sections
@@ -27,17 +27,18 @@ document.addEventListener("DOMContentLoaded", () => {
    * @param {number} tabIndex - Index of the tab to activate
    */
   const activateTab = (tabIndex) => {
-    // Set the active button
+    // Debugging: Log button clicks and tab activations
+    console.log(`Activating tab ${tabIndex}`);
+    
     buttons.forEach((button, idx) => {
       const isActive = idx === tabIndex;
       button.classList.toggle("active", isActive);
       button.setAttribute("aria-selected", isActive);
     });
 
-    // Set the active section
     sections.forEach((section, idx) => {
       const isActive = idx === tabIndex;
-      section.classList.toggle("active", isActive); // Use class to toggle visibility
+      section.style.display = isActive ? "block" : "none";
 
       // Set background image for the active section
       if (isActive) {
@@ -51,13 +52,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add event listeners to buttons
   buttons.forEach((button, index) => {
-    button.addEventListener("click", () => activateTab(index));
+    button.addEventListener("click", (event) => {
+      event.preventDefault();  // Prevent any default action (useful if you have links)
+      activateTab(index);
+    });
   });
 
   // Initialize the first tab on page load
   activateTab(0);
 });
-
   // Render React components into the DOM after tab functionality is loaded
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
