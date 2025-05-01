@@ -144,6 +144,36 @@
     });
   });
 </script>
+
+    <!-- React mounting script -->
+<script type="module">
+  import React from 'https://esm.sh/react';
+  import ReactDOM from 'https://esm.sh/react-dom/client';
+  import PrizeGrabEmbed from './src/components/PrizeGrabEmbed.js';
+  import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed.js';
+
+  function mountReactApp() {
+    const rootContainer = document.getElementById('root');
+    if (rootContainer) {
+      const root = ReactDOM.createRoot(rootContainer);
+      root.render(
+        React.createElement('div', null,
+          React.createElement(PrizeGrabEmbed),
+          React.createElement(CyberPetsAiTrainerEmbed)
+        )
+      );
+    } else {
+      console.warn("No #root element found. React not mounted.");
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const verified = sessionStorage.getItem("cyberpet_verified");
+    if (verified === "true") {
+      mountReactApp(); // only mount React if verified
+    }
+  });
+</script>
       <!-- Token gate script-->
 <script>
   const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
