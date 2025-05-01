@@ -22,8 +22,8 @@ const CyberPetsAiTrainerEmbed = () => {
       {showGame && (
         <div style={{ width: '100%', height: '600px', maxWidth: '800px', margin: '20px auto' }}>
           <iframe
-            src="/prizeGrab/index.html"
-            title="Prize Grab Game"
+            src="/CyberPetsAiTrainerEmbed/index.html"
+            title="CyberPetAi Trainer Lite"
             width="100%"
             height="100%"
             style={{ border: 'none', borderRadius: '8px' }}
