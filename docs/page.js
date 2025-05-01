@@ -1,5 +1,6 @@
 // Import React and ReactDOM to render the React app
-import React from 'react';
+//import React from 'react';
+import ReactDOM from 'react-dom/client';
 const root = createRoot(document.getElementById('root'));
 
 // Import PrizeGrabEmbed component
@@ -14,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Define background images for sections
   const backgrounds = [
-    ".docs/setplaywin_Card0-01.png",
-    ".docs/setplaywin_Card4-01.png",
-    ".docs/setplaywin_Card3-01.png",
-    ".docs/setplaywin_Card2-01.png",
-    ".docs/setplaywin_Card-01.png",
-    ".docs/setplaywin_Card5-01.png",
+    "./setplaywin_Card0-01.png",
+    "./setplaywin_Card4-01.png",
+    "./setplaywin_Card3-01.png",
+    "./setplaywin_Card2-01.png",
+    "./setplaywin_Card-01.png",
+    "./setplaywin_Card5-01.png",
   ];
 
   /**
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  React.createElement(React.StrictMode, null,
+  //React.createElement(React.StrictMode, null,
     React.createElement('div', null,
       React.createElement(PrizeGrabEmbed),
       React.createElement(CyberPetsAiTrainerEmbed)
