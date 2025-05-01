@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   activateTab(0);
 });
   // Render React components into the DOM after tab functionality is loaded
-const root = ReactDOM.createRoot(document.getElementById('root'));
+//const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   //React.createElement(React.StrictMode, null,
