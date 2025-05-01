@@ -1,11 +1,10 @@
 // Import React and ReactDOM to render the React app
-//import React from 'react';
 import ReactDOM from 'react-dom/client';
-const root = createRoot(document.getElementById('root'));
-
-// Import PrizeGrabEmbed component
 import PrizeGrabEmbed from './src/components/PrizeGrabEmbed';
 import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed';
+
+// Initialize the root for React
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 document.addEventListener("DOMContentLoaded", () => {
   // Select buttons and tab sections
@@ -60,12 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize the first tab on page load
   activateTab(0);
-});
-  // Render React components into the DOM after tab functionality is loaded
-//const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-  //React.createElement(React.StrictMode, null,
+  // Render React components into the DOM after tab functionality is loaded
+  root.render(
     React.createElement('div', null,
       React.createElement(PrizeGrabEmbed),
       React.createElement(CyberPetsAiTrainerEmbed)
