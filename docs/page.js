@@ -22,7 +22,7 @@ async function startVerification() {
     const userAddress = await signer.getAddress();
 
     // NFT contract interaction to verify ownership
-    const contract = new ethers.Contract(0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81, nftABI, provider);
+    const contract = new ethers.Contract("0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81", ["function balanceOf(address owner) view returns (uint256)"], provider);
     const balance = await contract.balanceOf(userAddress);
 
     if (balance.toNumber() > 0) {
