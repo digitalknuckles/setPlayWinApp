@@ -281,8 +281,11 @@ confirmNo.addEventListener('click', () => {
 // commmented out wallet connect import due to conflicting iframe sandboxing  
 
 //import { connectWallet, mintPrizeNFT } from './walletconnect.js';
-//window.mintPrizeNFT = mintPrizeNFT; 
+//window.mintPrizeNFT = mintPrizeNFT;
 
+   
+//import { mintPrize } from './walletconnect.js';
+   
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -920,7 +923,6 @@ function showVictoryOverlay() {
     } else {
       console.error("mintPrizeNFT is not defined.");
     }
-  });
 
   const restartBtn = document.createElement('button');
   restartBtn.textContent = "Restart Game";
