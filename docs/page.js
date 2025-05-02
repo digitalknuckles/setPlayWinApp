@@ -1,70 +1,91 @@
-// Import React and ReactDOM to render the React app
 import ReactDOM from 'react-dom/client';
 import PrizeGrabEmbed from './src/components/PrizeGrabEmbed';
 import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed';
 
-// Initialize the root for React
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Select buttons and tab sections
-  const buttons = document.querySelectorAll("menu.tab-buttons button");  // Ensure correct element selection
-  const sections = document.querySelectorAll(".tab-section");
+// Global state variable to control game loading
+let gameInitialized = false;
 
-  // Define background images for sections
-  const backgrounds = [
-    "./setplaywin_Card0-01.png",
-    "./setplaywin_Card4-01.png",
-    "./setplaywin_Card3-01.png",
-    "./setplaywin_Card2-01.png",
-    "./setplaywin_Card-01.png",
-    "./setplaywin_Card5-01.png",
-  ];
+async function startVerification() {
+  try {
+    // Check for MetaMask
+    if (!window.ethereum) {
+      alert("MetaMask is required.");
+      return;
+    }
 
-  /**
-   * Activates a specific tab by index
-   * @param {number} tabIndex - Index of the tab to activate
-   */
-  const activateTab = (tabIndex) => {
-    // Debugging: Log button clicks and tab activations
-    console.log(`Activating tab ${tabIndex}`);
-    
-    buttons.forEach((button, idx) => {
-      const isActive = idx === tabIndex;
-      button.classList.toggle("active", isActive);
-      button.setAttribute("aria-selected", isActive);
-    });
+    // Request wallet connection
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const userAddress = await signer.getAddress();
 
-    sections.forEach((section, idx) => {
-      const isActive = idx === tabIndex;
-      section.style.display = isActive ? "block" : "none";
+    // NFT contract interaction to verify ownership
+    const contract = new ethers.Contract(nftAddress, nftABI, provider);
+    const balance = await contract.balanceOf(userAddress);
 
-      // Set background image for the active section
-      if (isActive) {
-        section.style.backgroundImage = `url('${backgrounds[idx]}')`;
-        section.style.backgroundSize = "cover";
-        section.style.backgroundPosition = "center";
-        section.style.backgroundRepeat = "no-repeat";
+    if (balance.toNumber() > 0) {
+      const signature = await signer.signMessage(signatureMessage);
+      if (signature) {
+        sessionStorage.setItem("cyberpet_verified", "true"); // Mark as verified
+        showMainSite(); // Show React site after verification
+        initPhaserGame(); // Initialize Phaser game after successful verification
       }
-    });
-  };
+    } else {
+      document.getElementById("status").innerText = "You don't own a CyberPet NFT.";
+      document.getElementById("purchase-section").style.display = "block"; // Show buy section
+    }
+  } catch (err) {
+    console.error(err);
+    document.getElementById("status").innerText = "Verification failed.";
+  }
+}
 
-  // Add event listeners to buttons
-  buttons.forEach((button, index) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();  // Prevent any default action (useful if you have links)
-      activateTab(index);
-    });
-  });
-
-  // Initialize the first tab on page load
-  activateTab(0);
-
-   //Render React components into the DOM after tab functionality is loaded
+function showMainSite() {
+  // React rendering logic
   root.render(
     React.createElement('div', null,
       React.createElement(PrizeGrabEmbed),
-     React.createElement(CyberPetsAiTrainerEmbed)
+      React.createElement(CyberPetsAiTrainerEmbed)
     )
   );
+}
+
+function initPhaserGame() {
+  if (!gameInitialized) {
+    gameInitialized = true;
+
+    // Initialize Phaser game here
+    new Phaser.Game({
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      scene: {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    });
+  }
+}
+
+function preload() {
+  this.load.image('player', 'path/to/player/image.png');
+  // Other assets like background, sprites, etc.
+}
+
+function create() {
+  this.add.image(400, 300, 'player');
+  // Game logic and assets initialization
+}
+
+function update() {
+  // Update game state each frame
+}
+
+// Wait for DOMContentLoaded to make sure the page is ready before adding event listeners
+document.addEventListener("DOMContentLoaded", () => {
+  // Event listener for wallet connection button
+  document.getElementById("connect-wallet").addEventListener("click", startVerification);
 });
