@@ -17,56 +17,89 @@
 <body>
   <script defer src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
-  <script>
-  const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
-  const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
-  const signatureMessage = "Sign this message to verify access to CyberPetsAI.";
+ <script type="module">
+import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js";
 
-  function showMainSite() {
-    document.getElementById("token-gate").style.display = "none";
-    document.getElementById("main-site").style.display = "block";
-  }
+const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
+const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
+const signatureMessage = "Sign this message to verify access to CyberPetsAI.";
 
-  async function checkSession() {
-    const verified = sessionStorage.getItem("cyberpet_verified");
-    if (verified === "true") {
-      showMainSite();
+function createAccessModal() {
+  const modal = document.createElement("div");
+  modal.id = "wallet-modal";
+  modal.style.cssText = `
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.85); color: white; z-index: 9999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: sans-serif; text-align: center;
+  `;
+
+  modal.innerHTML = `
+    <h2>Verify NFT Access</h2>
+    <p id="modal-status">Connect your wallet to continue.</p>
+    <button id="modal-connect" style="padding: 10px 20px; font-size: 1rem; margin-top: 1rem;">Connect Wallet</button>
+  `;
+
+  document.body.appendChild(modal);
+  return modal;
+}
+
+async function verifyWalletAccess(statusEl) {
+  try {
+    if (!window.ethereum) {
+      statusEl.textContent = "MetaMask is required to access this site.";
+      return;
     }
-  }
 
-  async function startVerification() {
-    try {
-      if (!window.ethereum) {
-        alert("MetaMask is required.");
-        return;
+    statusEl.textContent = "Requesting wallet connection...";
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+
+    statusEl.textContent = "Checking NFT ownership...";
+    const contract = new ethers.Contract(nftAddress, nftABI, provider);
+    const balance = await contract.balanceOf(address);
+
+    if (balance.toNumber() > 0) {
+      const signature = await signer.signMessage(signatureMessage);
+      if (signature) {
+        sessionStorage.setItem("cyberpet_verified", "true");
+        return true;
       }
-
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
-      const userAddress = await signer.getAddress();
-
-      const contract = new ethers.Contract(nftAddress, nftABI, provider);
-      const balance = await contract.balanceOf(userAddress);
-
-      if (balance.toNumber() > 0) {
-        const signature = await signer.signMessage(signatureMessage);
-        if (signature) {
-          sessionStorage.setItem("cyberpet_verified", "true");
-          showMainSite();
-        }
-      } else {
-        document.getElementById("status").innerText = "You don't own a CyberPet NFT.";
-        document.getElementById("purchase-section").style.display = "block";
-      }
-    } catch (err) {
-      console.error(err);
-      document.getElementById("status").innerText = "Verification failed.";
+    } else {
+      statusEl.textContent = "You don’t own the required NFT.";
     }
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = "Verification failed. Try again.";
+  }
+  return false;
+}
+
+function showSiteContent() {
+  const modal = document.getElementById("wallet-modal");
+  if (modal) modal.remove();
+  document.body.style.overflow = "auto"; // re-enable scrolling
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (sessionStorage.getItem("cyberpet_verified") === "true") {
+    showSiteContent();
+    return;
   }
 
-  // Trigger after DOM is fully loaded
-  window.addEventListener("DOMContentLoaded", checkSession);
+  document.body.style.overflow = "hidden"; // lock scroll
+  const modal = createAccessModal();
+
+  const connectBtn = document.getElementById("modal-connect");
+  const statusEl = document.getElementById("modal-status");
+
+  connectBtn.addEventListener("click", async () => {
+    const verified = await verifyWalletAccess(statusEl);
+    if (verified) showSiteContent();
+  });
+});
 </script>
   
    <div id="token-gate" style="text-align: center; padding: 2rem;">
