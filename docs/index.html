@@ -16,6 +16,59 @@
 
 <body>
   <script defer src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+  <script>
+  const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
+  const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
+  const signatureMessage = "Sign this message to verify access to CyberPetsAI.";
+
+  function showMainSite() {
+    document.getElementById("token-gate").style.display = "none";
+    document.getElementById("main-site").style.display = "block";
+  }
+
+  async function checkSession() {
+    const verified = sessionStorage.getItem("cyberpet_verified");
+    if (verified === "true") {
+      showMainSite();
+    }
+  }
+
+  async function startVerification() {
+    try {
+      if (!window.ethereum) {
+        alert("MetaMask is required.");
+        return;
+      }
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const userAddress = await signer.getAddress();
+
+      const contract = new ethers.Contract(nftAddress, nftABI, provider);
+      const balance = await contract.balanceOf(userAddress);
+
+      if (balance.toNumber() > 0) {
+        const signature = await signer.signMessage(signatureMessage);
+        if (signature) {
+          sessionStorage.setItem("cyberpet_verified", "true");
+          showMainSite();
+        }
+      } else {
+        document.getElementById("status").innerText = "You don't own a CyberPet NFT.";
+        document.getElementById("purchase-section").style.display = "block";
+      }
+    } catch (err) {
+      console.error(err);
+      document.getElementById("status").innerText = "Verification failed.";
+    }
+  }
+
+  // Trigger after DOM is fully loaded
+  window.addEventListener("DOMContentLoaded", checkSession);
+</script>
+  
    <div id="token-gate" style="text-align: center; padding: 2rem;">
     <h1 id="status">Checking NFT access...</h1>
     <div id="wallet-section">
@@ -207,7 +260,7 @@
   });
 </script>  -->
 
-      <!-- Token gate script -->
+      <!-- Token gate script 
 <script>
   const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
   const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
@@ -258,7 +311,7 @@
 
   // Trigger after DOM is fully loaded
   window.addEventListener("DOMContentLoaded", checkSession);
-</script>
+</script>-->
   <script type="module">
   import React from 'https://esm.sh/react';
   import ReactDOM from 'https://esm.sh/react-dom/client';
