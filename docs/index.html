@@ -19,7 +19,7 @@
    <div id="token-gate" style="text-align: center; padding: 2rem;">
     <h1 id="status">Checking NFT access...</h1>
     <div id="wallet-section">
-     <button id="connect-wallet" style="padding: 10px 20px; font-size: 1rem;">Connect Wallet</button>
+     <button onclick="startVerification()" style="padding: 10px 20px; font-size: 1rem;">Connect Wallet</button>
     </div>
     <div id="purchase-section" style="display: none;">
       <p>You need a CyberPet NFT to access this site.</p>
@@ -207,7 +207,7 @@
   });
 </script>  -->
 
-      <!-- Token gate script
+      <!-- Token gate script -->
 <script>
   const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
   const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
@@ -258,7 +258,7 @@
 
   // Trigger after DOM is fully loaded
   window.addEventListener("DOMContentLoaded", checkSession);
-</script> -->
+</script>
   <script type="module">
   import React from 'https://esm.sh/react';
   import ReactDOM from 'https://esm.sh/react-dom/client';
@@ -277,9 +277,9 @@
   <footer>
     <p>&copy; 2024 SetPlayWin. All rights reserved.</p>
   </footer>
-  <!-- <script src="/react.js"></script>
-  <script src="/react-dom.js"></script> -->
+     
     <script src="/page.js"></script>
+     
 </body>
 
 </html>
