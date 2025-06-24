@@ -900,15 +900,11 @@ mintBtn.style.color = "white";
 // ✅ Active mint function
 mintBtn.addEventListener("click", async () => {
   try {
-    if (typeof window.mintPrizeNFT === 'function') {
-      await window.mintPrizeNFT(); // from walletconnect.js
-    } else {
-      console.error("mintPrizeNFT is not defined.");
-      showErrorMessage("Mint function not available.");
-    }
+    await mintPrizeNFT(); // This calls the function you imported/exported from walletconnect.js
+    alert("🎉 NFT Minted Successfully!");
   } catch (err) {
     console.error("Minting failed:", err);
-    showErrorMessage("Minting failed. Check console.");
+    alert("Minting failed. See console for details.");
   }
 });
 
