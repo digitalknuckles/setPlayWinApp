@@ -15,14 +15,16 @@
 </head>
 
 <body>
-  <script defer src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-
- <script type="module">
+<script defer src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  
+<!-- ERC 1155 token gate access-->
+<script type="module">
 import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js";
-//Groupies Meme Coin Contract ERC-1155
-const nftAddress = "0xca204bf3de9bacc7a86585b4504f2886887b328b";
-const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
-const signatureMessage = "Sign this message to verify access to SetPlayWin.com";
+
+const nftAddress = "0xca204bf3dE9BAcc7a86585B4504F2886887B328B";
+const nftABI = ["function balanceOf(address account, uint256 id) view returns (uint256)"];
+const tokenId = 1;
+const signatureMessage = "Verify 'Groupies Meme Coin' NFT to access SetPlayWin.";
 
 function createAccessModal() {
   const modal = document.createElement("div");
@@ -55,25 +57,30 @@ async function verifyWalletAccess(statusEl) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
-    const address = await signer.getAddress();
+    const userAddress = await signer.getAddress();
 
     statusEl.textContent = "Checking NFT ownership...";
     const contract = new ethers.Contract(nftAddress, nftABI, provider);
-    const balance = await contract.balanceOf(address);
+    const balance = await contract.balanceOf(userAddress, tokenId);
 
     if (balance.toNumber() > 0) {
       const signature = await signer.signMessage(signatureMessage);
       if (signature) {
-        sessionStorage.setItem("gmc_verified", "true");
+        sessionStorage.setItem("Groupies_verified", "true");
         return true;
       }
     } else {
-      statusEl.textContent = "You don’t own the required NFT.";
+      statusEl.textContent = "You don’t own the required NFT. Redirecting to minting page...";
+      // ⏳ Wait a moment, then redirect
+      setTimeout(() => {
+        window.location.href = "https://opensea.io/item/matic/0xca204bf3de9bacc7a86585b4504f2886887b328b/1";
+      }, 3000);
     }
   } catch (err) {
     console.error(err);
     statusEl.textContent = "Verification failed. Try again.";
   }
+
   return false;
 }
 
@@ -84,7 +91,7 @@ function showSiteContent() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (sessionStorage.getItem("gmc_verified") === "true") {
+  if (sessionStorage.getItem("Groupies_verified") === "true") {
     showSiteContent();
     return;
   }
@@ -101,6 +108,92 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
+                                                  <!--ERC-721 Token Verification (replace collection contract address(no token id required))--> 
+                                                <!--<script type="module">
+                                                import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js";
+                                                //Groupies Meme Coin Contract ERC-1155
+                                                const nftAddress = "0xca204bf3de9bacc7a86585b4504f2886887b328b";
+                                                const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
+                                                const signatureMessage = "Sign this message to verify access to SetPlayWin.com";
+                                                
+                                                function createAccessModal() {
+                                                  const modal = document.createElement("div");
+                                                  modal.id = "wallet-modal";
+                                                  modal.style.cssText = `
+                                                    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                                                    background: rgba(0, 0, 0, 0.85); color: white; z-index: 9999;
+                                                    display: flex; flex-direction: column; align-items: center; justify-content: center;
+                                                    font-family: sans-serif; text-align: center;
+                                                  `;
+                                                
+                                                  modal.innerHTML = `
+                                                    <h2>Verify NFT Access</h2>
+                                                    <p id="modal-status">Connect your wallet to continue.</p>
+                                                    <button id="modal-connect" style="padding: 10px 20px; font-size: 1rem; margin-top: 1rem;">Connect Wallet</button>
+                                                  `;
+                                                
+                                                  document.body.appendChild(modal);
+                                                  return modal;
+                                                }
+                                                
+                                                async function verifyWalletAccess(statusEl) {
+                                                  try {
+                                                    if (!window.ethereum) {
+                                                      statusEl.textContent = "MetaMask is required to access this site.";
+                                                      return;
+                                                    }
+                                                
+                                                    statusEl.textContent = "Requesting wallet connection...";
+                                                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                                                    await provider.send("eth_requestAccounts", []);
+                                                    const signer = provider.getSigner();
+                                                    const address = await signer.getAddress();
+                                                
+                                                    statusEl.textContent = "Checking NFT ownership...";
+                                                    const contract = new ethers.Contract(nftAddress, nftABI, provider);
+                                                    const balance = await contract.balanceOf(address);
+                                                
+                                                    if (balance.toNumber() > 0) {
+                                                      const signature = await signer.signMessage(signatureMessage);
+                                                      if (signature) {
+                                                        sessionStorage.setItem("gmc_verified", "true");
+                                                        return true;
+                                                      }
+                                                    } else {
+                                                      statusEl.textContent = "You don’t own the required NFT.";
+                                                    }
+                                                  } catch (err) {
+                                                    console.error(err);
+                                                    statusEl.textContent = "Verification failed. Try again.";
+                                                  }
+                                                  return false;
+                                                }
+                                                
+                                                function showSiteContent() {
+                                                  const modal = document.getElementById("wallet-modal");
+                                                  if (modal) modal.remove();
+                                                  document.body.style.overflow = "auto"; // re-enable scrolling
+                                                }
+                                                
+                                                document.addEventListener("DOMContentLoaded", () => {
+                                                  if (sessionStorage.getItem("gmc_verified") === "true") {
+                                                    showSiteContent();
+                                                    return;
+                                                  }
+                                                
+                                                  document.body.style.overflow = "hidden"; // lock scroll
+                                                  const modal = createAccessModal();
+                                                
+                                                  const connectBtn = document.getElementById("modal-connect");
+                                                  const statusEl = document.getElementById("modal-status");
+                                                
+                                                  connectBtn.addEventListener("click", async () => {
+                                                    const verified = await verifyWalletAccess(statusEl);
+                                                    if (verified) showSiteContent();
+                                                  });
+                                                });
+                                                </script>-->
   
    <div id="token-gate" style="text-align: center; padding: 2rem;">
     <h1 id="status">Checking for "Groupies Meme Coins"...</h1>
