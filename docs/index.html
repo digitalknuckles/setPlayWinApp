@@ -22,7 +22,7 @@ import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.es
 //Groupies Meme Coin Contract ERC-1155
 const nftAddress = "0xca204bf3de9bacc7a86585b4504f2886887b328b";
 const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
-const signatureMessage = "Sign this message to verify access to CyberPetsAI.";
+const signatureMessage = "Sign this message to verify access to SetPlayWin.com";
 
 function createAccessModal() {
   const modal = document.createElement("div");
@@ -64,7 +64,7 @@ async function verifyWalletAccess(statusEl) {
     if (balance.toNumber() > 0) {
       const signature = await signer.signMessage(signatureMessage);
       if (signature) {
-        sessionStorage.setItem("cyberpet_verified", "true");
+        sessionStorage.setItem("gmc_verified", "true");
         return true;
       }
     } else {
@@ -84,7 +84,7 @@ function showSiteContent() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (sessionStorage.getItem("cyberpet_verified") === "true") {
+  if (sessionStorage.getItem("gmc_verified") === "true") {
     showSiteContent();
     return;
   }
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
      <button onclick="startVerification()" style="padding: 10px 20px; font-size: 1rem;">Connect Wallet</button>
     </div>
     <div id="purchase-section" style="display: none;">
-      <p>You need a CyberPet NFT to access this site.</p>
+      <p>You need a Groupies Meme Coin NFT to access this site.</p>
       <a href="https://opensea.io/item/matic/0xca204bf3de9bacc7a86585b4504f2886887b328b/1" target="_blank">
         <button>Mint on OpenSea</button>
       </a>
