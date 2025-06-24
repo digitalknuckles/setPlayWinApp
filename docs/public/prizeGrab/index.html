@@ -237,7 +237,6 @@ function create() {
       fontSize: '28px', backgroundColor: '#ccc', color: '#000', padding: { x: 10, y: 5 }
     }).setOrigin(0.5).setInteractive().setDepth(22);
 
-import { mintPrizeNFT } from './walletconnect.js';
 
 claimPrizeButton.on('pointerdown', async () => {
   try {
@@ -265,7 +264,7 @@ claimPrizeButton.on('pointerdown', async () => {
   }
 </script>
 <script type="module">
-  //import { mintPrizeNFT } from './walletconnect.js';
+  import { mintPrizeNFT } from './walletconnect.js';
   // now mintPrizeNFT is scoped locally, not global
 </script>
 </body>
