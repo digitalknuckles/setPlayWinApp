@@ -237,35 +237,20 @@ function create() {
       fontSize: '28px', backgroundColor: '#ccc', color: '#000', padding: { x: 10, y: 5 }
     }).setOrigin(0.5).setInteractive().setDepth(22);
 
+claimPrizeButton.on('pointerdown', async () => {
+  try {
+    await mintPrizeNFT(); // this handles provider/signer/contract logic
+    alert("🎉 Prize minted successfully!");
+  } catch (err) {
+    console.error("Minting failed:", err);
+    if (err.code === 4001) {
+      alert("Transaction rejected by user.");
+    } else {
+      alert("Minting failed. See console for details.");
+    }
+  }
+});
 
-
-    // Request account access and set provider/signer
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-
-    const contractAddress = "0xcaB543F6Af365a9E75f56e7Fc85D9C84F1482B12";
-    const abi = ["function mintPrize() public"];
-
-    const contract = new ethers.Contract(contractAddress, abi, signer);
-
-    // Trigger mint
-    const tx = await contract.mintPrize();
-    
-    console.log("Transaction sent:", tx.hash);
-    claimPrizeButton.on('pointerdown', async () => {
-      try {
-        await mintPrizeNFT(); // imported from walletconnect.js
-        alert("🎉 Prize minted successfully!");
-      } catch (err) {
-        console.error("Minting failed:", err);
-        if (err.code === 4001) {
-          alert("Transaction rejected by user.");
-        } else {
-          alert("Minting failed. See console for details.");
-        }
-      }
-    });
     mintButton.on('pointerdown', () => {
       window.open("https://opensea.io/collection/heartbones", '_blank');
       game.destroy(true);
