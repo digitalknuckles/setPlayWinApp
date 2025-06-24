@@ -237,12 +237,19 @@ function create() {
       fontSize: '28px', backgroundColor: '#ccc', color: '#000', padding: { x: 10, y: 5 }
     }).setOrigin(0.5).setInteractive().setDepth(22);
 
-    claimPrizeButton.on('pointerdown', async () => {
+claimPrizeButton.on('pointerdown', async () => {
   try {
-    if (typeof window.ethereum === 'undefined') {
-      alert("MetaMask is not detected. Please install MetaMask to continue.");
-      return;
+    await mintPrizeNFT(); // imported from walletconnect.js
+    alert("🎉 Prize minted successfully!");
+  } catch (err) {
+    console.error("Minting failed:", err);
+    if (err.code === 4001) {
+      alert("Transaction rejected by user.");
+    } else {
+      alert("Minting failed. See console for details.");
     }
+  }
+});
 
     // Request account access and set provider/signer
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
