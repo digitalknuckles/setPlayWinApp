@@ -238,19 +238,30 @@ function create() {
     }).setOrigin(0.5).setInteractive().setDepth(22);
 
 
-claimPrizeButton.on('pointerdown', async () => {
-  try {
-    await mintPrizeNFT();
-    alert("🎉 Prize minted successfully!");
-  } catch (err) {
-    console.error("Minting failed:", err);
-    if (err.code === 4001) {
-      alert("Transaction rejected by user.");
-    } else {
-      alert("Minting failed. See console for details.");
-    }
-  }
-});
+    claimPrizeButton.on('pointerdown', async () => {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+    
+        const contractAddress = "0xcaB543F6Af365a9E75f56e7Fc85D9C84F1482B12";
+        const abi = ["function mintPrize() public"];
+        const contract = new ethers.Contract(contractAddress, abi, signer);
+    
+        const tx = await contract.mintPrize();
+        console.log("Transaction sent:", tx.hash);
+    
+        await tx.wait();
+        alert("🎉 Prize minted successfully!");
+      } catch (err) {
+        console.error("Minting failed:", err);
+        if (err.code === 4001) {
+          alert("Transaction rejected by user.");
+        } else {
+          alert("Minting failed. See console for details.");
+        }
+      }
+    });
 
     mintButton.on('pointerdown', () => {
       window.open("https://opensea.io/collection/heartbones", '_blank');
@@ -264,7 +275,7 @@ claimPrizeButton.on('pointerdown', async () => {
   }
 </script>
 <script type="module">
-  import { mintPrizeNFT } from './walletconnect.js';
+  //import { mintPrizeNFT } from './walletconnect.js';
   // now mintPrizeNFT is scoped locally, not global
 </script>
 </body>
