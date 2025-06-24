@@ -237,9 +237,11 @@ function create() {
       fontSize: '28px', backgroundColor: '#ccc', color: '#000', padding: { x: 10, y: 5 }
     }).setOrigin(0.5).setInteractive().setDepth(22);
 
+import { mintPrizeNFT } from './walletconnect.js';
+
 claimPrizeButton.on('pointerdown', async () => {
   try {
-    await mintPrizeNFT(); // this handles provider/signer/contract logic
+    await mintPrizeNFT();
     alert("🎉 Prize minted successfully!");
   } catch (err) {
     console.error("Minting failed:", err);
@@ -263,7 +265,7 @@ claimPrizeButton.on('pointerdown', async () => {
   }
 </script>
 <script type="module">
-  import { mintPrizeNFT } from './walletconnect.js';
+  //import { mintPrizeNFT } from './walletconnect.js';
   // now mintPrizeNFT is scoped locally, not global
 </script>
 </body>
