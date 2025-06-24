@@ -65,15 +65,10 @@ window.mintPrizeNFT = mintPrizeNFT;
 
 window.addEventListener("message", (event) => {
   const { action, message } = event.data;
+
   if (action === "victory-achieved") {
-    alert(message);
-    connectWallet().then(() => {
-      return mintPrize();
-    }).then(() => {
-      alert("🏆 NFT Minted Successfully!");
-    }).catch((err) => {
-      console.error("Minting error:", err);
-      alert("Error minting NFT.");
-    });
+    console.log("🏆 Victory achieved:", message);
+    // Let the game display the UI and handle mint trigger separately
+    // (No automatic minting here)
   }
 });
