@@ -899,20 +899,20 @@ function showVictoryOverlay() {
   mintBtn.addEventListener("click", showMintDisabledMessage);
 
       // Disabled minting function due to sandbox limitations
- //       console.log("Minting disabled in sandbox mode.");
-  //      function showMintDisabledMessage() {
- // const msg = document.createElement('div');
- // msg.textContent = "Minting is disabled in this environment.";
-//  msg.style.position = "fixed";
-//  msg.style.top = "20%";
-//  msg.style.left = "50%";
-//  msg.style.transform = "translateX(-50%)";
-//  msg.style.background = "rgba(0,0,0,0.8)";
-//  msg.style.color = "white";
-//  msg.style.padding = "15px 25px";
-//  msg.style.borderRadius = "10px";
-//  msg.style.zIndex = "10000";
-//  document.body.appendChild(msg);
+      console.log("Minting disabled in sandbox mode.");
+      function showMintDisabledMessage() {
+  const msg = document.createElement('div');
+  msg.textContent = "Minting is disabled in this environment.";
+  msg.style.position = "fixed";
+  msg.style.top = "20%";
+  msg.style.left = "50%";
+  msg.style.transform = "translateX(-50%)";
+  msg.style.background = "rgba(0,0,0,0.8)";
+  msg.style.color = "white";
+  msg.style.padding = "15px 25px";
+  msg.style.borderRadius = "10px";
+  msg.style.zIndex = "10000";
+  document.body.appendChild(msg);
 
   setTimeout(() => {
     msg.remove();
