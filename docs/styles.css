@@ -1,15 +1,25 @@
-/* General Styles */
-/* General Styles */
+/* =============================== */
+/* Variables / Theme Colors         */
+/* =============================== */
 :root {
   --primary-color: #007acc;
   --secondary-color: #4caf50;
-  --background-color: #f4f4f4;
-  --text-color: #333;
-  --button-bg: #eee;
-  --button-hover: #ddd;
-  --shadow-color: rgba(0, 0, 0, 0.2);
+  --background-color: #f9f9f9;
+  --surface-color: #ffffff;
+  --text-color: #333333;
+  --text-muted: #666666;
+  --button-bg: #f0f0f0;
+  --button-hover: #e0e0e0;
+  --accent-color: #ff7f50;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --radius: 12px;
+  --spacing: 1rem;
+  --max-width: 1200px;
 }
 
+/* =============================== */
+/* Reset & Base Styles             */
+/* =============================== */
 * {
   margin: 0;
   padding: 0;
@@ -20,76 +30,148 @@ html, body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  min-height: 100%;
 }
 
-/* Header */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =============================== */
+/* Header                          */
+/* =============================== */
 header.app-header {
-  background: #282c34;
+  background-color: #1f2228;
   color: white;
-  padding: 1rem 2rem;
+  padding: var(--spacing) calc(var(--spacing) * 2);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  flex-wrap: wrap;
 }
 
 .logo-section {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .logo {
   width: 60px;
   height: 60px;
-  margin-right: 1rem;
+  object-fit: contain;
 }
 
 header h1 {
   font-size: 1.8rem;
+  margin: 0;
 }
 
 header p {
   font-size: 1rem;
-  color: #ccc;
+  color: #cccccc;
 }
 
-/* Main Content */
+/* =============================== */
+/* Main Content                    */
+/* =============================== */
 main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
-  min-height: calc(100vh - 160px); /* Adjust based on header & footer height */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing);
 }
 
-/* Tab Navigation */
+/* =============================== */
+/* Token Gate / Verification       */
+/* =============================== */
+.react-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.react-gate .status-text {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.react-gate button.primary {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.react-gate button.primary:hover {
+  background-color: #005fa3;
+}
+
+.react-gate button.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.purchase-box {
+  padding: var(--spacing);
+  border-radius: var(--radius);
+  background-color: var(--surface-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  text-align: center;
+}
+
+.purchase-box a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  background-color: var(--button-bg);
+  transition: background 0.2s ease-in-out;
+}
+
+.purchase-box a:hover {
+  background-color: var(--button-hover);
+}
+
+/* =============================== */
+/* Tab Navigation                  */
+/* =============================== */
 menu.tab-buttons {
   display: flex;
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-  width: 100%;
   flex-wrap: wrap;
 }
 
 menu.tab-buttons button {
   padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius);
   background-color: var(--button-bg);
   color: var(--text-color);
   cursor: pointer;
   font-size: 1rem;
-  transition: all 0.3s ease-in-out;
   box-shadow: 0 2px 4px var(--shadow-color);
+  transition: all 0.3s ease-in-out;
 }
 
 menu.tab-buttons button:hover {
@@ -99,48 +181,58 @@ menu.tab-buttons button:hover {
 menu.tab-buttons button.active {
   background-color: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 6px var(--shadow-color);
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
-/* Optional: Tab section styles to complement button styles */
+/* =============================== */
+/* Tab Sections / Cards            */
+/* =============================== */
 .tab-section {
-  display: none; /* Hide all sections by default */
-  transition: opacity 0.3s ease-in-out; /* Smooth fade transition when switching tabs */
+  display: none;
+  width: 100%;
+  max-width: var(--max-width);
+  background-color: var(--surface-color);
+  padding: calc(var(--spacing) * 2);
+  margin-top: var(--spacing);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .tab-section.active {
-  display: block; /* Show the active section */
-  opacity: 1; /* Fully visible for active section */
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .tab-section:not(.active) {
-  opacity: 0; /* Faded out for inactive sections */
+  opacity: 0;
+  transform: translateY(10px);
 }
 
-/* Footer */
+/* =============================== */
+/* Footer                          */
+/* =============================== */
 footer {
   text-align: center;
-  padding: 1rem;
-  background: #282c34;
+  padding: var(--spacing);
+  background-color: #1f2228;
   color: white;
   font-size: 0.9rem;
   width: 100%;
 }
 
-/* Responsive Design */
+/* =============================== */
+/* Responsive Design               */
+/* =============================== */
 @media (max-width: 768px) {
   header.app-header {
     flex-direction: column;
-    align-items: center;
     text-align: center;
-  }
-
-  .logo {
-    margin-bottom: 1rem;
+    gap: 0.5rem;
   }
 
   menu.tab-buttons {
-    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
@@ -150,8 +242,7 @@ footer {
   }
 
   .tab-section {
-    padding: 1.5rem;
-    font-size: 0.9rem;
+    padding: var(--spacing);
   }
 }
 
@@ -161,6 +252,6 @@ footer {
   }
 
   .tab-section {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
