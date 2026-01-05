@@ -340,26 +340,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 </script>
 <script>
-  const tabButtons = document.querySelectorAll(".tab-buttons button");
-  const tabSections = document.querySelectorAll(".tab-section");
-  const footer = document.querySelector("footer");
+const tabButtons = document.querySelectorAll(".tab-buttons button");
+const tabSections = document.querySelectorAll(".tab-section");
 
-  tabButtons.forEach((btn, index) => {
-    btn.addEventListener("click", () => {
-      document.querySelector(".tab-buttons .active").classList.remove("active");
-      btn.classList.add("active");
+tabButtons.forEach((btn, index) => {
+  btn.addEventListener("click", () => {
+    document.querySelector(".tab-buttons .active").classList.remove("active");
+    btn.classList.add("active");
 
-      document.querySelector(".tab-section.active").classList.remove("active");
-      tabSections[index].classList.add("active");
-
-      // Hide footer on FunFart Games (index 5)
-      if (index === 5) {
-        footer.style.display = "none";
-      } else {
-        footer.style.display = "block";
-      }
-    });
+    document.querySelector(".tab-section.active").classList.remove("active");
+    tabSections[index].classList.add("active");
   });
+});
+
+// Game Start Buttons
+document.getElementById('start-prizegrab').addEventListener('click', () => {
+  document.getElementById('start-prizegrab').style.display = 'none';
+  document.getElementById('game-container').style.display = 'block';
+});
+
+document.getElementById('start-ai-trainer').addEventListener('click', () => {
+  document.getElementById('start-ai-trainer').style.display = 'none';
+  document.getElementById('ai-trainer-container').style.display = 'block';
+});
 </script>
 
     <!-- React mounting script 
