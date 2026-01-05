@@ -217,108 +217,113 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
   </header>
 
-  <main>
-   <div id="root"></div>
-  <script type="module" src="./page.js"></script>
-    <menu class="tab-buttons">
-      <button class="active" data-tab="0">Overview</button>
-      <button data-tab="1">Key Features</button>
-      <button data-tab="2">Core Projects</button>
-      <button data-tab="3">Roadmap</button>
-      <button data-tab="4">Contact</button>
-      <button data-tab="5">FunFart Arcade</button>
-    </menu>
+ <main>
+  <!-- Tab Navigation -->
+  <menu class="tab-buttons">
+    <button class="active" data-tab="0">Overview</button>
+    <button data-tab="1">Key Features</button>
+    <button data-tab="2">Core Projects</button>
+    <button data-tab="3">Roadmap</button>
+    <button data-tab="4">Contact</button>
+    <button data-tab="5">FunFart Arcade</button>
+  </menu>
 
-    <div id="tab-content">
-      <div class="tab-section active" id="section-0" style="background-image: url('./setplaywin_Card0-01.png');">
-        <h2>Overview</h2>
-        <ul>
-          <li>Welcome to SetPlayWinApp, the platform that brings together FunFart Games, DigitalKnuckles, and LazerPixel Dev.</li>
-          <li>Explore games, NFTs, tokens, and community utilities in one place!</li>
-        </ul>
-      </div>
-      <div class="tab-section" id="section-1" style="background-image: url('./setplaywin_Card4-01.png');">
-        <h2>Key Features</h2>
-        <ul>
-          <li>Interactive Gaming Hub: Play and discover new games, track progress, and compete with others.</li>
-          <li>Web3 Integration: Experience blockchain-powered gaming, NFT collecting, and token utilities.</li>
-          <li>Community-Driven Platform: Connect with enthusiasts, join events, and contribute to projects.</li>
-        </ul>
-      </div>
-      <div class="tab-section" id="section-2" style="background-image: url('./setplaywin_Card3-01.png');">
-        <h2>Core Projects</h2>
-        <ul>
-          <li>FunFart Games: Quirky and innovative games like "HB Studio", "Funfart Grab", "CyberpetsAi Trainer", and More!.</li>
-          <li>DigitalKnuckles: Exclusive NFTs and utilities to enhance your gaming experience.</li>
-          <li>Digitalknuckles Dev: Experimental projects, tutorials, and tools for game developers.</li>
-        </ul>
-      </div>
-      <div class="tab-section" id="section-3" style="background-image: url('./setplaywin_Card2-01.png');">
-        <h2>Roadmap</h2>
-        <ul>
-          <li>Phase 1: Launch the gaming hub and NFT marketplace.</li>
-          <li>Phase 2: Introduce new tokens, collections, utilities, and holistic access.</li>
-          <li>Phase 3: Experimental community features like co-op gaming.</li>
-          <li>Phase 4: Launch the SetPlayWin entertainment ecosystem.</li>
-        </ul>
-      </div>
-      <div class="tab-section" id="section-4" style="background-image: url('./setplaywin_Card-01.png');">
-        <h2>Contact</h2>
-        <ul>
-          <li>Email: setplaywin@gmail.com</li>
-          <li>Discord: Join the SetPlayWin, Digitalknuckles, and Funfart Games Community</li>
-          <li>Website: <a href="http://www.setplaywin.com" target="_blank">www.setplaywin.com</a></li>
-          <li>Website: <a href="http://www.digitalknuckles.xyz" target="_blank">Digitalkunkles.xyz(GMC Token Gated)</a></li>
-        </ul>
-      </div>
-      <div class="tab-section" id="section-5" style="background-image: url('./setplaywin_Card5-01.png');">
-                <h2>FunFart Arcade</h2>
-<!-- PrizeGrab Game Embed -->
-<div style="text-align: center;">
-  <!-- Button to start the game -->
-  <button onclick="startGame()" style="padding: 10px 20px; font-size: 16px;">
-    Start Game
-  </button>
+  <!-- Tab Sections -->
+  <div id="tab-content">
 
-  <!-- iframe will appear after clicking the button -->
-  <div id="game-container" style="display: none; width: 100%; height: 600px; max-width: 800px; margin: 20px auto;">
-    <iframe
-      src="public/prizeGrab/index.html"
-      title="PrizeGrab Game"
-      width="100%"
-      height="100%"
-      style="border: none; border-radius: 8px;"
-    ></iframe>
-  </div>
-</div>
-
-<!-- CyberPets Ai Trainer Embed -->
-<div style="text-align: center;">
-  <!-- Button to start the game -->
-  <button onclick="startAiTrainerGame()" style="padding: 10px 20px; font-size: 16px;">
-    Start Game
-  </button>
-
-  <!-- iframe will appear after clicking the button -->
-  <div id="ai-trainer-container" style="display: none; width: 100%; height: 600px; max-width: 800px; margin: 20px auto;">
-    <iframe
-      src="public/CyberPetsAiTrainer/index.html"
-      title="CyberPets Ai Trainer"
-      width="100%"
-      height="100%"
-      style="border: none; border-radius: 8px;"
-    ></iframe>
-  </div>
-</div>
-        <h2>FunFart Games Info</h2>
-        <ul>
-          <li>Email: funfart85@gmail.com</li>
-          <li>Discord: Join the FunFart Games Community on Discord!</li>
-          <li>Website: <a href="http://www.funfartgames.xyz" target="_blank">www.funfartgames.xyz (Under Construction)</a></li>
-        </ul>
-      </div>
+    <!-- Overview -->
+    <div class="tab-section active" id="section-0">
+      <h2>Overview</h2>
+      <ul>
+        <li>Welcome to SetPlayWinApp, the platform that brings together FunFart Games, DigitalKnuckles, and LazerPixel Dev.</li>
+        <li>Explore games, NFTs, tokens, and community utilities in one place!</li>
+      </ul>
     </div>
-  </main>
+
+    <!-- Key Features -->
+    <div class="tab-section" id="section-1">
+      <h2>Key Features</h2>
+      <ul>
+        <li>Interactive Gaming Hub: Play and discover new games, track progress, and compete with others.</li>
+        <li>Web3 Integration: Experience blockchain-powered gaming, NFT collecting, and token utilities.</li>
+        <li>Community-Driven Platform: Connect with enthusiasts, join events, and contribute to projects.</li>
+      </ul>
+    </div>
+
+    <!-- Core Projects -->
+    <div class="tab-section" id="section-2">
+      <h2>Core Projects</h2>
+      <ul>
+        <li>FunFart Games: Quirky and innovative games like "HB Studio", "Funfart Grab", "CyberpetsAi Trainer", and more.</li>
+        <li>DigitalKnuckles: Exclusive NFTs and utilities to enhance your gaming experience.</li>
+        <li>Digitalknuckles Dev: Experimental projects, tutorials, and tools for game developers.</li>
+      </ul>
+    </div>
+
+    <!-- Roadmap -->
+    <div class="tab-section" id="section-3">
+      <h2>Roadmap</h2>
+      <ul>
+        <li>Phase 1: Launch the gaming hub and NFT marketplace.</li>
+        <li>Phase 2: Introduce new tokens, collections, utilities, and holistic access.</li>
+        <li>Phase 3: Experimental community features like co-op gaming.</li>
+        <li>Phase 4: Launch the SetPlayWin entertainment ecosystem.</li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="tab-section" id="section-4">
+      <h2>Contact</h2>
+      <ul>
+        <li>Email: setplaywin@gmail.com</li>
+        <li>Discord: Join the SetPlayWin, Digitalknuckles, and Funfart Games Community</li>
+        <li>Website: <a href="http://www.setplaywin.com" target="_blank">www.setplaywin.com</a></li>
+        <li>Website: <a href="http://www.digitalknuckles.xyz" target="_blank">Digitalknuckles.xyz (GMC Token Gated)</a></li>
+      </ul>
+    </div>
+
+    <!-- FunFart Arcade -->
+    <div class="tab-section" id="section-5">
+      <h2>FunFart Arcade</h2>
+
+      <!-- PrizeGrab Game Embed -->
+      <div class="game-container">
+        <button class="primary" id="start-prizegrab">Start PrizeGrab</button>
+        <div id="game-container" class="iframe-wrapper" style="display:none;">
+          <iframe
+            src="public/prizeGrab/index.html"
+            title="PrizeGrab Game"
+            width="100%"
+            height="600"
+            style="border: none; border-radius: 12px;"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- CyberPets Ai Trainer Embed -->
+      <div class="game-container">
+        <button class="primary" id="start-ai-trainer">Start CyberPets Trainer</button>
+        <div id="ai-trainer-container" class="iframe-wrapper" style="display:none;">
+          <iframe
+            src="public/CyberPetsAiTrainer/index.html"
+            title="CyberPets Ai Trainer"
+            width="100%"
+            height="600"
+            style="border: none; border-radius: 12px;"
+          ></iframe>
+        </div>
+      </div>
+
+      <h2>FunFart Games Info</h2>
+      <ul>
+        <li>Email: funfart85@gmail.com</li>
+        <li>Discord: Join the FunFart Games Community on Discord!</li>
+        <li>Website: <a href="http://www.funfartgames.xyz" target="_blank">www.funfartgames.com (Under Construction)</a></li>
+      </ul>
+    </div>
+
+  </div>
+</main>
 
 
      
