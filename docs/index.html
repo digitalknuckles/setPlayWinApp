@@ -21,91 +21,87 @@
 <script type="module">
 import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js";
 
-const nftAddress = "0xca204bf3dE9BAcc7a86585B4504F2886887B328B";
-const nftABI = ["function balanceOf(address account, uint256 id) view returns (uint256)"];
-const tokenId = 1;
-const signatureMessage = "Verify 'Groupies Meme Coin' NFT to access SetPlayWin.";
+const NFT_ADDRESS = "0xca204bf3dE9BAcc7a86585B4504F2886887B328B";
+const TOKEN_ID = 1;
+const ABI = [
+  "function balanceOf(address account, uint256 id) view returns (uint256)"
+];
+const SESSION_KEY = "groupies_verified";
+const MESSAGE = "Verify Groupies Meme Coin NFT to access SetPlayWin.";
 
-function createAccessModal() {
+function createModal() {
   const modal = document.createElement("div");
   modal.id = "wallet-modal";
   modal.style.cssText = `
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0, 0, 0, 0.85); color: white; z-index: 9999;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-family: sans-serif; text-align: center;
+    position:fixed; inset:0;
+    background:rgba(0,0,0,0.85);
+    display:flex; align-items:center; justify-content:center;
+    z-index:9999; color:white; font-family:sans-serif;
   `;
-
   modal.innerHTML = `
-    <h2>Verify NFT Access</h2>
-    <p id="modal-status">Connect your wallet to continue.</p>
-    <button id="modal-connect" style="padding: 10px 20px; font-size: 1rem; margin-top: 1rem;">Connect Wallet</button>
+    <div style="background:#111;padding:2rem;border-radius:12px;text-align:center;width:320px;">
+      <h2>NFT Verification</h2>
+      <p id="status">Connect wallet to continue</p>
+      <button id="connect">Connect Wallet</button>
+    </div>
   `;
-
   document.body.appendChild(modal);
-  return modal;
 }
 
-async function verifyWalletAccess(statusEl) {
-  try {
-    if (!window.ethereum) {
-      statusEl.textContent = "MetaMask is required to access this site.";
-      return;
-    }
-
-    statusEl.textContent = "Requesting wallet connection...";
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-    const userAddress = await signer.getAddress();
-
-    statusEl.textContent = "Checking NFT ownership...";
-    const contract = new ethers.Contract(nftAddress, nftABI, provider);
-    const balance = await contract.balanceOf(userAddress, tokenId);
-
-    if (balance.toNumber() > 0) {
-      const signature = await signer.signMessage(signatureMessage);
-      if (signature) {
-        sessionStorage.setItem("Groupies_verified", "true");
-        return true;
-      }
-    } else {
-      statusEl.textContent = "You don’t own the required NFT. Redirecting to minting page...";
-      // ⏳ Wait a moment, then redirect
-      setTimeout(() => {
-        window.location.href = "https://opensea.io/item/matic/0xca204bf3de9bacc7a86585b4504f2886887b328b/1";
-      }, 3000);
-    }
-  } catch (err) {
-    console.error(err);
-    statusEl.textContent = "Verification failed. Try again.";
-  }
-
-  return false;
+function unlockSite() {
+  document.getElementById("wallet-modal")?.remove();
+  document.getElementById("main-site").style.display = "block";
+  document.body.style.overflow = "auto";
 }
 
-function showSiteContent() {
-  const modal = document.getElementById("wallet-modal");
-  if (modal) modal.remove();
-  document.body.style.overflow = "auto"; // re-enable scrolling
-}
+async function verify() {
+  const status = document.getElementById("status");
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (sessionStorage.getItem("Groupies_verified") === "true") {
-    showSiteContent();
+  if (!window.ethereum) {
+    status.textContent = "MetaMask required";
     return;
   }
 
-  document.body.style.overflow = "hidden"; // lock scroll
-  const modal = createAccessModal();
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
 
-  const connectBtn = document.getElementById("modal-connect");
-  const statusEl = document.getElementById("modal-status");
-
-  connectBtn.addEventListener("click", async () => {
-    const verified = await verifyWalletAccess(statusEl);
-    if (verified) showSiteContent();
+  // 🔗 Force Polygon
+  await window.ethereum.request({
+    method: "wallet_switchEthereumChain",
+    params: [{ chainId: "0x89" }]
   });
+
+  const signer = provider.getSigner();
+  const address = await signer.getAddress();
+
+  status.textContent = "Checking NFT ownership…";
+
+  const contract = new ethers.Contract(NFT_ADDRESS, ABI, provider);
+  const balance = await contract.balanceOf(address, TOKEN_ID);
+
+  if (balance.gt(0)) {
+    await signer.signMessage(MESSAGE);
+    sessionStorage.setItem(SESSION_KEY, "true");
+    unlockSite();
+  } else {
+    status.innerHTML = `
+      NFT not found.<br/>
+      <a href="https://opensea.io/item/matic/${NFT_ADDRESS}/${TOKEN_ID}" target="_blank">
+        Mint on OpenSea
+      </a>
+    `;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (sessionStorage.getItem(SESSION_KEY) === "true") {
+    unlockSite();
+    return;
+  }
+
+  document.body.style.overflow = "hidden";
+  createModal();
+  document.getElementById("connect").onclick = verify;
 });
 </script>
 
