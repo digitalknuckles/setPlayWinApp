@@ -65,6 +65,16 @@ async function loadNFTPreview(contract, tokenId) {
     console.warn("NFT preview failed");
   }
 }
+  async function loadENS(provider, address) {
+  const name = await provider.lookupAddress(address);
+  if (!name) return;
+
+  const avatar = await provider.getAvatar(name);
+  document.getElementById("ens-profile").innerHTML = `
+    ${avatar ? `<img src="${avatar}" />` : ''}
+    <span>${name}</span>
+  `;
+}
   const tabs = [
     { title: "Prize Grab", content: e(PrizeGrabEmbed) },
     { title: "AI Trainer", content: e(CyberPetsAiTrainerEmbed) }
