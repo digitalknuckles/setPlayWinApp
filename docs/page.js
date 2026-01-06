@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import { ethers } from 'ethers';
-import PrizeGrabEmbed from './src/components/PrizeGrabEmbed';
-import CyberPetsAiTrainerEmbed from './src/components/CyberPetsAiTrainerEmbed';
+import React, { useState, useEffect } from "https://esm.sh/react@18.2.0";
+import ReactDOM from "https://esm.sh/react-dom@18.2.0/client";
+import { ethers } from "https://esm.sh/ethers@5.7.2";
+
+import PrizeGrabEmbed from "./src/components/PrizeGrabEmbed.js";
+import CyberPetsAiTrainerEmbed from "./src/components/CyberPetsAiTrainerEmbed.js";
 
 // NFT Token Gate Config
 const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
