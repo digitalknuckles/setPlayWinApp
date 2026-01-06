@@ -2,7 +2,7 @@ SetPlayWinApp
 
 
 Important Notice
-All tokens, NFTs, and digital collectibles associated with FunFart Games, SetPlayWinApp, $GMC, $FARTS, or any related ecosystem projects are participation and utility-based assets. They are not securities or investment products.
+All tokens, NFTs, and digital collectibles associated with FunFart Games, SetPlayWinApp, $GMC, $FARTS, $BBS or any related ecosystem projects are participation and utility-based assets. They are not securities or investment products.
 
 There is no expectation of financial gain, profit, dividends, or price appreciation.
 
