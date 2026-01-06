@@ -51,7 +51,20 @@ function Page() {
       setStatus("Verification failed");
     }
   }
+async function loadNFTPreview(contract, tokenId) {
+  try {
+    let uri = await contract.uri(tokenId);
+    uri = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
+    const meta = await fetch(uri).then(r => r.json());
 
+    document.getElementById("nft-preview").innerHTML = `
+      <img src="${meta.image.replace("ipfs://", "https://ipfs.io/ipfs/")}" />
+      <p>${meta.name}</p>
+    `;
+  } catch {
+    console.warn("NFT preview failed");
+  }
+}
   const tabs = [
     { title: "Prize Grab", content: e(PrizeGrabEmbed) },
     { title: "AI Trainer", content: e(CyberPetsAiTrainerEmbed) }
