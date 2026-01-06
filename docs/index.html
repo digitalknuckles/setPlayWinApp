@@ -2,26 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SetPlayWin&copy;</title>
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-<body>
-  <div id="ens-profile" class="ens-bar"></div>
-  <div id="nft-preview" class="nft-badge"></div>
-  <div id="wallet-modal" class="wallet-modal hidden">
-  <div class="wallet-card">
-    <div class="spinner"></div>
-    <h2 id="wallet-title">Connect Wallet</h2>
-    <p id="wallet-status">Waiting for wallet connection…</p>
-    <button id="wallet-connect" class="primary">Connect</button>
-  </div>
-</div>
-  <div id="root"></div>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SetPlayWin ©</title>
 
-  <script type="module" src="./page.js"></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Prevent FOUC while React loads -->
+  <style>
+    body {
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Wallet / Identity Bar -->
+  <header class="identity-bar">
+    <div id="ens-profile" class="ens-bar"></div>
+    <div id="nft-preview" class="nft-badge"></div>
+  </header>
+
+  <!-- Wallet Modal -->
+  <div id="wallet-modal" class="wallet-modal hidden" role="dialog" aria-modal="true">
+    <div class="wallet-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2 id="wallet-title">Connect Wallet</h2>
+      <p id="wallet-status">Waiting for wallet connection…</p>
+      <button id="wallet-connect" class="primary" type="button">
+        Connect
+      </button>
+    </div>
+  </div>
+
+  <!-- React App Root -->
+  <main id="root"></main>
+
+  <!-- React Entry -->
+  <script type="module">
+    import "./page.js";
+
+    // Reveal page once JS is loaded
+    document.body.style.visibility = "visible";
+  </script>
+
 </body>
 </html>
-
-
-
-
