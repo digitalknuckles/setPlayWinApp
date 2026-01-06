@@ -228,7 +228,41 @@ footer {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
+/* ================================
+   wallet modal spinner
+================================ */
+.wallet-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
 
+.wallet-modal.hidden { display: none; }
+
+.wallet-card {
+  background: #111;
+  padding: 2rem;
+  border-radius: 14px;
+  text-align: center;
+  width: 320px;
+  box-shadow: 0 0 30px rgba(0,0,0,.6);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 1rem auto;
+  border: 4px solid #333;
+  border-top: 4px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
 /* ================================
    RESPONSIVE
 ================================ */
@@ -268,4 +302,5 @@ footer {
     height: 320px;
   }
 }
+
 
