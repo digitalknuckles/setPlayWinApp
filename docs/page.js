@@ -18,7 +18,7 @@ function hideWalletModal() {
 const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
 const nftABI = [
   "function balanceOf(address owner) view returns (uint256)",
-  "function uri(uint256 id) view returns (string)"
+  "function tokenURI(uint256 tokenId) view returns (string)"
 ];
 const signatureMessage = "Sign this message to verify access to CyberPetsAI.";
 
@@ -31,6 +31,32 @@ function Page() {
   const [ens, setEns] = useState(null);
   const [nft, setNft] = useState(null);
 
+  async function loadNFTPreview(ownerAddress) {
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contract = new ethers.Contract(nftAddress, nftABI, provider);
+
+    // Assume tokenId 0 or 1 (adjust if needed)
+    let uri = await contract.tokenURI(0);
+    uri = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
+
+    const meta = await fetch(uri).then(r => r.json());
+    const img = meta.image.replace("ipfs://", "https://ipfs.io/ipfs/");
+
+    document.getElementById("nft-preview").innerHTML = `
+      <img src="${img}" />
+      <p>${meta.name}</p>
+    `;
+
+    // 🎨 NFT-based UI skin
+    document.body.style.setProperty("--primary", "#ffd700");
+    document.body.style.setProperty("--accent", "#ff9800");
+
+  } catch (e) {
+    console.warn("NFT preview failed", e);
+  }
+}
+  
   useEffect(() => {
     if (sessionStorage.getItem("cyberpet_verified") === "true") {
       setIsVerified(true);
@@ -65,17 +91,25 @@ async function handleWalletConnect() {
       setIsVerified(true);
       setStatus("Access granted");
 
-      await loadENS(provider, addr);
-      await loadNFTPreview(addr);
+async function loadENS(provider, address) {
+  const ensBar = document.getElementById("ens-profile");
+  if (!ensBar) return;
 
-      hideWalletModal();
-    } else {
-      showWalletModal("NFT not detected", false);
-    }
-  } catch (err) {
-    console.error(err);
-    showWalletModal("Verification failed", false);
+  let name = await provider.lookupAddress(address);
+  let avatar = null;
+
+  if (name) {
+    avatar = await provider.getAvatar(name);
   }
+
+  if (!avatar) {
+    avatar = `https://avatars.dicebear.com/api/identicon/${address}.svg`;
+  }
+
+  ensBar.innerHTML = `
+    <img src="${avatar}" alt="avatar" />
+    <span>${name || address.slice(0,6) + "…" + address.slice(-4)}</span>
+  `;
 }
 
   const tabs = [
