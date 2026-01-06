@@ -55,6 +55,17 @@ header.app-header {
   align-items: center;
   gap: 1rem;
 }
+.ens-bar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.ens-bar img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
 .nft-badge img {
   width: 96px;
   border-radius: 12px;
@@ -306,6 +317,7 @@ footer {
     height: 320px;
   }
 }
+
 
 
 
