@@ -5,6 +5,16 @@ import { ethers } from "https://esm.sh/ethers@5.7.2";
 import PrizeGrabEmbed from "./src/components/PrizeGrabEmbed.js";
 import CyberPetsAiTrainerEmbed from "./src/components/CyberPetsAiTrainerEmbed.js";
 
+function showWalletModal(message = "Verifying wallet…", loading = true) {
+  document.getElementById("wallet-modal")?.classList.remove("hidden");
+  document.getElementById("wallet-status").textContent = message;
+  document.querySelector(".spinner")?.classList.toggle("hidden", !loading);
+}
+
+function hideWalletModal() {
+  document.getElementById("wallet-modal")?.classList.add("hidden");
+}
+
 const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
 const nftABI = [
   "function balanceOf(address owner) view returns (uint256)",
@@ -27,49 +37,46 @@ function Page() {
     }
   }, []);
 
-  async function handleWalletConnect() {
-    if (!window.ethereum) return alert("MetaMask required");
+async function handleWalletConnect() {
+  try {
+    if (!window.ethereum) {
+      alert("MetaMask required");
+      return;
+    }
 
-    try {
-      setStatus("Verifying wallet...");
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
-      const addr = await signer.getAddress();
+    showWalletModal("Connecting wallet…", true);
 
-      const contract = new ethers.Contract(nftAddress, nftABI, provider);
-      const balance = await contract.balanceOf(addr);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
 
-      if (balance.toNumber() === 0) {
-        setStatus("NFT not detected");
-        return;
-      }
+    showWalletModal("Checking NFT ownership…", true);
+
+    const contract = new ethers.Contract(nftAddress, nftABI, provider);
+    const balance = await contract.balanceOf(addr);
+
+    if (balance.toNumber() > 0) {
+      showWalletModal("Signing verification message…", true);
 
       await signer.signMessage(signatureMessage);
+
       sessionStorage.setItem("cyberpet_verified", "true");
       setIsVerified(true);
       setStatus("Access granted");
 
-      // ENS
-      const name = await provider.lookupAddress(addr);
-      if (name) {
-        const avatar = await provider.getAvatar(name);
-        setEns({ name, avatar });
-      }
+      await loadENS(provider, addr);
+      await loadNFTPreview(addr);
 
-      // NFT preview
-      let uri = await contract.uri(1);
-      uri = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
-      const meta = await fetch(uri).then(r => r.json());
-      setNft({
-        name: meta.name,
-        image: meta.image.replace("ipfs://", "https://ipfs.io/ipfs/")
-      });
-
-    } catch {
-      setStatus("Verification failed");
+      hideWalletModal();
+    } else {
+      showWalletModal("NFT not detected", false);
     }
+  } catch (err) {
+    console.error(err);
+    showWalletModal("Verification failed", false);
   }
+}
 
   const tabs = [
     { title: "Prize Grab", content: e(PrizeGrabEmbed) },
