@@ -1,44 +1,11 @@
-import React, { useState } from 'react';
+import React from "https://esm.sh/react@18.2.0";
+const e = React.createElement;
 
-const CyberPetsAiTrainerEmbed = () => {
-  const [showGame, setShowGame] = useState(false);
-
-  const handleStartGame = () => {
-    setShowGame(true);
-  };
-
-  return React.createElement(
-    'div',
-    { style: { textAlign: 'center' } },
-    !showGame &&
-      React.createElement(
-        'button',
-        {
-          onClick: handleStartGame,
-          style: { padding: '10px 20px', fontSize: '16px' },
-        },
-        'Start Game'
-      ),
-    showGame &&
-      React.createElement(
-        'div',
-        {
-          style: {
-            width: '100%',
-            height: '600px',
-            maxWidth: '800px',
-            margin: '20px auto',
-          },
-        },
-        React.createElement('iframe', {
-          src: './public/CyberPetsAiTrainer/index.html',
-          title: 'CyberPetAi Trainer Lite',
-          width: '100%',
-          height: '100%',
-          style: { border: 'none', borderRadius: '8px' },
-        })
-      )
-  );
-};
-
-export default CyberPetsAiTrainerEmbed;
+export default function CyberPetsAiTrainerEmbed() {
+  return e("iframe", {
+    src: "./public/CyberPetsAiTrainer/index.html",
+    width: "100%",
+    height: "600",
+    style: { border: "none", borderRadius: "12px" }
+  });
+}
