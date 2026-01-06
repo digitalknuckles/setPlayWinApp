@@ -133,7 +133,16 @@ button.primary {
 .tab-section.active {
   display: block;
 }
+.tab-section {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .3s ease, transform .3s ease;
+}
 
+.tab-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* ================================
    GAME / EMBEDS
 ================================ */
@@ -220,3 +229,4 @@ iframe {
     height: 320px;
   }
 }
+
