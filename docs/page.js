@@ -6,7 +6,10 @@ import PrizeGrabEmbed from "./src/components/PrizeGrabEmbed.js";
 import CyberPetsAiTrainerEmbed from "./src/components/CyberPetsAiTrainerEmbed.js";
 
 const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
-const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
+const nftABI = [
+  "function balanceOf(address owner) view returns (uint256)",
+  "function uri(uint256 id) view returns (string)"
+];
 const signatureMessage = "Sign this message to verify access to CyberPetsAI.";
 
 const e = React.createElement;
@@ -15,6 +18,8 @@ function Page() {
   const [status, setStatus] = useState("Connect wallet to verify access.");
   const [isVerified, setIsVerified] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const [ens, setEns] = useState(null);
+  const [nft, setNft] = useState(null);
 
   useEffect(() => {
     if (sessionStorage.getItem("cyberpet_verified") === "true") {
@@ -23,14 +28,10 @@ function Page() {
   }, []);
 
   async function handleWalletConnect() {
+    if (!window.ethereum) return alert("MetaMask required");
+
     try {
-      if (!window.ethereum) {
-        alert("MetaMask required");
-        return;
-      }
-
       setStatus("Verifying wallet...");
-
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner();
@@ -39,48 +40,54 @@ function Page() {
       const contract = new ethers.Contract(nftAddress, nftABI, provider);
       const balance = await contract.balanceOf(addr);
 
-      if (balance.toNumber() > 0) {
-        await signer.signMessage(signatureMessage);
-        sessionStorage.setItem("cyberpet_verified", "true");
-        setIsVerified(true);
-        setStatus("Access granted");
-      } else {
+      if (balance.toNumber() === 0) {
         setStatus("NFT not detected");
+        return;
       }
+
+      await signer.signMessage(signatureMessage);
+      sessionStorage.setItem("cyberpet_verified", "true");
+      setIsVerified(true);
+      setStatus("Access granted");
+
+      // ENS
+      const name = await provider.lookupAddress(addr);
+      if (name) {
+        const avatar = await provider.getAvatar(name);
+        setEns({ name, avatar });
+      }
+
+      // NFT preview
+      let uri = await contract.uri(1);
+      uri = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
+      const meta = await fetch(uri).then(r => r.json());
+      setNft({
+        name: meta.name,
+        image: meta.image.replace("ipfs://", "https://ipfs.io/ipfs/")
+      });
+
     } catch {
       setStatus("Verification failed");
     }
   }
-async function loadNFTPreview(contract, tokenId) {
-  try {
-    let uri = await contract.uri(tokenId);
-    uri = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
-    const meta = await fetch(uri).then(r => r.json());
 
-    document.getElementById("nft-preview").innerHTML = `
-      <img src="${meta.image.replace("ipfs://", "https://ipfs.io/ipfs/")}" />
-      <p>${meta.name}</p>
-    `;
-  } catch {
-    console.warn("NFT preview failed");
-  }
-}
-  async function loadENS(provider, address) {
-  const name = await provider.lookupAddress(address);
-  if (!name) return;
-
-  const avatar = await provider.getAvatar(name);
-  document.getElementById("ens-profile").innerHTML = `
-    ${avatar ? `<img src="${avatar}" />` : ''}
-    <span>${name}</span>
-  `;
-}
   const tabs = [
     { title: "Prize Grab", content: e(PrizeGrabEmbed) },
     { title: "AI Trainer", content: e(CyberPetsAiTrainerEmbed) }
   ];
 
   return e("main", null,
+
+    ens && e("div", { className: "ens-bar" },
+      ens.avatar && e("img", { src: ens.avatar }),
+      e("span", null, ens.name)
+    ),
+
+    nft && e("div", { className: "nft-badge" },
+      e("img", { src: nft.image }),
+      e("p", null, nft.name)
+    ),
+
     !isVerified &&
       e("div", { className: "react-gate" },
         e("p", null, status),
