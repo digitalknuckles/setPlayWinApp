@@ -79,7 +79,42 @@ main {
   padding: 2rem 1rem;
   gap: 1.5rem;
 }
+.react-gate {
+  text-align: center;
+  padding: 2rem;
+}
 
+.primary {
+  padding: 0.8rem 1.4rem;
+  border-radius: 8px;
+  border: none;
+  background: #007acc;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.primary:hover {
+  background: #005fa3;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tab-buttons button.active {
+  background: #007acc;
+  color: white;
+}
+
+.tab-section {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+}
 /* ================================
    STATUS / MESSAGES
 ================================ */
@@ -233,3 +268,4 @@ footer {
     height: 320px;
   }
 }
+
