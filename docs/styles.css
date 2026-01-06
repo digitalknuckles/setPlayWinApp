@@ -55,7 +55,11 @@ header.app-header {
   align-items: center;
   gap: 1rem;
 }
-
+.nft-badge img {
+  width: 96px;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
 header h1 {
   font-size: 1.9rem;
   font-weight: 700;
@@ -302,5 +306,6 @@ footer {
     height: 320px;
   }
 }
+
 
 
