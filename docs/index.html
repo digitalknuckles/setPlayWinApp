@@ -6,9 +6,18 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <div id="wallet-modal" class="wallet-modal hidden">
+  <div class="wallet-card">
+    <div class="spinner"></div>
+    <h2 id="wallet-title">Connect Wallet</h2>
+    <p id="wallet-status">Waiting for wallet connection…</p>
+    <button id="wallet-connect" class="primary">Connect</button>
+  </div>
+</div>
   <div id="root"></div>
 
   <script type="module" src="./page.js"></script>
 </body>
 </html>
+
 
