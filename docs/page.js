@@ -5,31 +5,14 @@ import { ethers } from "https://esm.sh/ethers@5.7.2";
 import PrizeGrabEmbed from "./src/components/PrizeGrabEmbed.js";
 import CyberPetsAiTrainerEmbed from "./src/components/CyberPetsAiTrainerEmbed.js";
 
-// NFT Token Gate Config
 const nftAddress = "0x1C37df48Fa365B1802D0395eE9F7Db842726Eb81";
 const nftABI = ["function balanceOf(address owner) view returns (uint256)"];
 const signatureMessage = "Sign this message to verify access to CyberPetsAI.";
 
-const tabs = [
-  { title: 'Overview', content: React.createElement('ul', null,
-      React.createElement('li', null, 'Welcome to SetPlayWinApp, the platform that brings together FunFart Games, DigitalKnuckles, and LazerPixel Dev.'),
-      React.createElement('li', null, 'Explore games, NFTs, tokens, and community utilities in one place!')
-  )},
-  { title: 'Key Features', content: React.createElement('ul', null,
-      React.createElement('li', null, 'Interactive Gaming Hub'),
-      React.createElement('li', null, 'Web3 Integration'),
-      React.createElement('li', null, 'Community Driven Platform')
-  )},
-  { title: 'FunFart Arcade', content:
-      React.createElement('div', null,
-        React.createElement(PrizeGrabEmbed),
-        React.createElement(CyberPetsAiTrainerEmbed)
-      )
-  }
-];
+const e = React.createElement;
 
 function Page() {
-  const [status, setStatus] = useState('Connect your wallet to verify NFT access.');
+  const [status, setStatus] = useState("Connect wallet to verify access.");
   const [isVerified, setIsVerified] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -42,63 +25,59 @@ function Page() {
   async function handleWalletConnect() {
     try {
       if (!window.ethereum) {
-        alert("MetaMask is required.");
+        alert("MetaMask required");
         return;
       }
 
       setStatus("Verifying wallet...");
+
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner();
-      const address = await signer.getAddress();
+      const addr = await signer.getAddress();
 
       const contract = new ethers.Contract(nftAddress, nftABI, provider);
-      const balance = await contract.balanceOf(address);
+      const balance = await contract.balanceOf(addr);
 
-      if (balance.gt(0)) {
+      if (balance.toNumber() > 0) {
         await signer.signMessage(signatureMessage);
         sessionStorage.setItem("cyberpet_verified", "true");
         setIsVerified(true);
+        setStatus("Access granted");
       } else {
-        setStatus("NFT not detected.");
+        setStatus("NFT not detected");
       }
-    } catch (err) {
-      console.error(err);
-      setStatus("Verification failed.");
+    } catch {
+      setStatus("Verification failed");
     }
   }
 
-  return React.createElement(
-    'main',
-    null,
+  const tabs = [
+    { title: "Prize Grab", content: e(PrizeGrabEmbed) },
+    { title: "AI Trainer", content: e(CyberPetsAiTrainerEmbed) }
+  ];
+
+  return e("main", null,
     !isVerified &&
-      React.createElement('div', { className: 'react-gate' },
-        React.createElement('p', { className: 'status-text' }, status),
-        React.createElement('button', { className: 'primary', onClick: handleWalletConnect }, 'Connect Wallet')
+      e("div", { className: "react-gate" },
+        e("p", null, status),
+        e("button", { className: "primary", onClick: handleWalletConnect }, "Connect Wallet")
       ),
 
     isVerified &&
-      React.createElement(React.Fragment, null,
-        React.createElement('menu', { className: 'tab-buttons' },
-          tabs.map((tab, i) =>
-            React.createElement('button', {
+      e(React.Fragment, null,
+        e("menu", { className: "tab-buttons" },
+          tabs.map((t, i) =>
+            e("button", {
               key: i,
-              className: activeTab === i ? 'active' : '',
+              className: activeTab === i ? "active" : "",
               onClick: () => setActiveTab(i)
-            }, tab.title)
+            }, t.title)
           )
         ),
-        React.createElement('div', { id: 'tab-content' },
-          tabs.map((tab, i) =>
-            React.createElement('div', {
-              key: i,
-              className: `tab-section ${activeTab === i ? 'active' : ''}`
-            }, tab.content)
-          )
-        )
+        e("div", { className: "tab-section active" }, tabs[activeTab].content)
       )
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(React.createElement(Page));
+ReactDOM.createRoot(document.getElementById("root")).render(e(Page));
