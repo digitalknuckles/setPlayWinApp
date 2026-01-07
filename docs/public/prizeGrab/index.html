@@ -57,6 +57,7 @@
   let startMenuImage, quitPopup, leftButton, rightButton;
   let dropButton, leftMoveButton, rightMoveButton;
   let dropBlinkTween;
+  let clawCable;
 
   function preload() {
     this.load.image('background', 'https://magenta-broad-orca-873.mypinata.cloud/ipfs/bafybeigsjjbs6njnjsbx4t3kfwmvwzjn4mlt67crjcoc7qg5ismmysnfnq');
@@ -72,6 +73,9 @@
 function create() {
   this.add.image(400, 300, 'background');
 
+  //Mouse clamp and swipe movement clamp (off)
+  this.input.dragDistanceThreshold = 9999;
+
   prizeGroup = this.physics.add.group();
   fallingGroup = this.physics.add.group();
 
@@ -86,6 +90,9 @@ function create() {
   clawHitbox = this.physics.add.image(400, 50).setImmovable(true).setVisible(false);
   clawHitbox.body.setSize(20, 40).setOffset(-10, -20);
 
+  clawCable = this.add.graphics();
+  clawCable.setDepth(1); // behind claw, above background
+  
   overlay = this.add.image(400, 300, 'overlay_idle').setDepth(3);
 
   if (!prizeBox || !prizeBox.body) {
@@ -202,13 +209,13 @@ rightMoveButton
     overlay.setTexture('overlay_idle');
   });
 
-  // Touch drag for claw movement
+  /*/ Touch drag for claw movement
   this.input.on('pointermove', (pointer) => {
     if (!clawDropping && !clawRetracting) {
       claw.x = Phaser.Math.Clamp(pointer.x, 50, 750);
       clawHitbox.x = claw.x;
     }
-  });
+  });*/
 
   // Keyboard controls
   this.input.keyboard.on('keydown-LEFT', () => {
@@ -255,6 +262,7 @@ function handleClawAction() {
 
   function update() {
     if (victory) return;
+    drawClawCable();
 
     if (moveLeft && !clawDropping && !clawRetracting) {
       claw.x = clawHitbox.x = Math.max(50, claw.x - 5);
@@ -306,6 +314,27 @@ function handleClawAction() {
     child.destroy();
   });
 }
+
+function drawClawCable() {
+  if (!clawCable || !claw) return;
+
+  clawCable.clear();
+
+  // Cable style
+  clawCable.lineStyle(2, 0x444444, 1);
+
+  const startX = claw.x;
+  const startY = 0; // top of scene
+  const endX = claw.x;
+  //const endY = claw.y - 10; // attach slightly above claw
+const slack = clawDropping ? 0 : 6;
+const endY = claw.y - 10 + slack;
+  clawCable.beginPath();
+  clawCable.moveTo(startX, startY);
+  clawCable.lineTo(endX, endY);
+  clawCable.strokePath();
+}
+  
   function showVictoryScreen() {
     victory = true;
     this.add.image(400, 300, 'victoryBg').setDepth(21);
