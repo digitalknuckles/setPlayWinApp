@@ -35,7 +35,28 @@ html, body {
   background: radial-gradient(circle at top, #15193a, var(--bg-main));
   color: var(--text-main);
 }
+    .legal-toggle {
+  margin-top: 2rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1rem;
+}
 
+.legal-toggle button {
+  background: none;
+  color: #00eaff;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.legal-content {
+  display: none;
+  margin-top: 1rem;
+  font-size: 0.85remf;
+  color: #ccc;
+}
 /* ================================
    IDENTITY BAR (ENS + NFT)
 ================================ */
@@ -229,4 +250,5 @@ iframe {
     height: 320px;
   }
 }
+
 
