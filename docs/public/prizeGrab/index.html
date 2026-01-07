@@ -94,6 +94,17 @@ function stopDropBlink() {
   }
 }
   
+  function spawnPrizes(scene) {
+  prizeGroup.clear(true, true);
+
+  for (let x = 200; x < 600; x += 150) {
+    const prize = scene.physics.add.image(x, 550, 'prize').setImmovable(true);
+    prize.body.setSize(16, 24).setOffset(20, 14);
+    prize.setDepth(1);
+    prizeGroup.add(prize);
+  }
+}
+  
 function create() {
   this.add.image(400, 300, 'background');
 
@@ -103,13 +114,14 @@ function create() {
   prizeGroup = this.physics.add.group();
   fallingGroup = this.physics.add.group();
 
-  for (let x = 200; x < 600; x += 150) {
-    const prize = this.physics.add.image(x, 550, 'prize').setImmovable(true);
-    prize.body.setSize(16, 24).setOffset(20, 14);
-    prize.setDepth(1);
-    prizeGroup.add(prize);
-  }
-
+  spawnPrizes(this);
+/*            for (let x = 200; x < 600; x += 150) {
+              const prize = this.physics.add.image(x, 550, 'prize').setImmovable(true);
+              prize.body.setSize(16, 24).setOffset(20, 14);
+              prize.setDepth(1);
+              prizeGroup.add(prize);
+            }
+*/
   claw = this.add.image(400, 50, 'claw').setDepth(2);
   clawHitbox = this.physics.add.image(400, 50).setImmovable(true).setVisible(false);
   clawHitbox.body.setSize(20, 40).setOffset(-10, -20);
@@ -143,19 +155,33 @@ escButton.on('pointerdown', () => {
   function resetToStartMenu() {
   gameActive = false;
   victory = false;
+
   clawDropping = false;
   clawRetracting = false;
   holdingObject = false;
   attachedPrize = null;
 
+  // Reset claw
   claw.setPosition(400, 50);
   clawHitbox.setPosition(400, 50);
 
+  // Clear all physics objects
   fallingGroup.clear(true, true);
 
-  startMenuImage.setVisible(true);
+  // Destroy and respawn prizes cleanly
+  spawnPrizes(this);
+
+  // Stop blinking + music
   stopDropBlink();
-}
+    
+        //Music Placeholder
+                        /* if (bgMusic && bgMusic.isPlaying) {
+                            bgMusic.stop();
+                          }
+                          */
+  // Show start menu
+    startMenuImage.setVisible(true);
+  }
 
 const controlY = 540;
 const spacing = 120;
@@ -277,7 +303,10 @@ function handleClawAction() {
   function update() {
     if (victory) return;
     drawClawCable();
+    if (!gameActive) return;
+    if (victory) return;
 
+    
     if (moveLeft && !clawDropping && !clawRetracting) {
       claw.x = clawHitbox.x = Math.max(50, claw.x - 5);
     }
@@ -335,7 +364,9 @@ function drawClawCable() {
   clawCable.clear();
 
   // Cable style
-  clawCable.lineStyle(2, 0x444444, 1);
+  //clawCable.lineStyle(2, 0x444444, 1); //option 1
+  //clawCable.lineStyle(5, 0x2b2b2b, 1); //option 2
+  clawCable.lineStyle(5, 0x2b2b2b, 0.9); //option 3
 
   const startX = claw.x;
   const startY = 0; // top of scene
