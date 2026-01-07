@@ -55,6 +55,8 @@
   let clawDropping = false, clawRetracting = false, holdingObject = false;
   let attachedPrize = null, moveLeft = false, moveRight = false;
   let startMenuImage, quitPopup, leftButton, rightButton;
+  let dropButton, leftMoveButton, rightMoveButton;
+  let dropBlinkTween;
 
   function preload() {
     this.load.image('background', 'https://magenta-broad-orca-873.mypinata.cloud/ipfs/bafybeigsjjbs6njnjsbx4t3kfwmvwzjn4mlt67crjcoc7qg5ismmysnfnq');
@@ -93,23 +95,111 @@ function create() {
 
   startMenuImage = this.add.image(400, 300, 'startMenu').setDepth(20);
   startMenuImage.setInteractive().on('pointerdown', () => {
-    startMenuImage.setVisible(false);
-  });
+  startMenuImage.setVisible(false);
+  startDropBlink(this);
+});
 
+function startDropBlink(scene) {
+  if (dropBlinkTween) return;
+
+  dropBlinkTween = scene.tweens.add({
+    targets: dropButton,
+    alpha: 0.2,
+    duration: 400,
+    yoyo: true,
+    repeat: -1
+  });
+}
+
+function stopDropBlink() {
+  if (dropBlinkTween) {
+    dropBlinkTween.stop();
+    dropBlinkTween = null;
+    dropButton.setAlpha(1);
+  }
+}
+  
   // Escape Button (bottom-left)
   const escButton = this.add.text(10, 560, 'EXIT', {
     fontSize: '24px', backgroundColor: '#222', color: '#fff', padding: { x: 10, y: 5 }
   }).setInteractive().setDepth(21);
-  escButton.on('pointerdown', () => {
-    if (!quitPopup) showQuitPopup();
+escButton.on('pointerdown', () => {
+  resetToStartMenu.call(this);
+});
+
+  function resetToStartMenu() {
+  victory = false;
+  clawDropping = false;
+  clawRetracting = false;
+  holdingObject = false;
+  attachedPrize = null;
+
+  claw.setPosition(400, 50);
+  clawHitbox.setPosition(400, 50);
+
+  fallingGroup.clear(true, true);
+
+  startMenuImage.setVisible(true);
+  stopDropBlink();
+}
+
+const controlY = 540;
+const spacing = 120;
+
+// LEFT BUTTON
+leftMoveButton = this.add.text(400 - spacing, controlY, '◀', {
+  fontSize: '32px',
+  backgroundColor: '#333',
+  color: '#fff',
+  padding: { x: 25, y: 15 }
+}).setOrigin(0.5).setInteractive().setDepth(21);
+
+leftMoveButton
+  .on('pointerdown', () => {
+    moveLeft = true;
+    overlay.setTexture('overlay_left');
+  })
+  .on('pointerup', () => {
+    moveLeft = false;
+    overlay.setTexture('overlay_idle');
+  })
+  .on('pointerout', () => {
+    moveLeft = false;
+    overlay.setTexture('overlay_idle');
   });
 
-  // Claw Action Button (bottom center)
-  const clawButton = this.add.text(150, 550, 'GRAB / DROP', {
-    fontSize: '24px', backgroundColor: '#f00', color: '#fff', padding: { x: 20, y: 10 }
-  }).setInteractive().setDepth(21);
-  clawButton.on('pointerdown', () => {
-    if (!startMenuImage.visible) handleClawAction();
+// DROP BUTTON
+dropButton = this.add.text(400, controlY, 'DROP', {
+  fontSize: '26px',
+  backgroundColor: '#d00',
+  color: '#fff',
+  padding: { x: 30, y: 15 }
+}).setOrigin(0.5).setInteractive().setDepth(21);
+
+dropButton.on('pointerdown', () => {
+  if (!startMenuImage.visible) handleClawAction();
+});
+
+// RIGHT BUTTON
+rightMoveButton = this.add.text(400 + spacing, controlY, '▶', {
+  fontSize: '32px',
+  backgroundColor: '#333',
+  color: '#fff',
+  padding: { x: 25, y: 15 }
+}).setOrigin(0.5).setInteractive().setDepth(21);
+
+rightMoveButton
+  .on('pointerdown', () => {
+    moveRight = true;
+    overlay.setTexture('overlay_right');
+  })
+  .on('pointerup', () => {
+    moveRight = false;
+    overlay.setTexture('overlay_idle');
+  })
+  .on('pointerout', () => {
+    moveRight = false;
+    overlay.setTexture('overlay_idle');
   });
 
   // Touch drag for claw movement
@@ -151,16 +241,17 @@ function create() {
   // REMOVED this.input.on('pointerdown') global block
 }
 
-  function handleClawAction() {
-    if (!clawDropping && !clawRetracting && !holdingObject) {
-      clawDropping = true;
-    } else if (holdingObject) {
-      fallingGroup.add(attachedPrize);
-      attachedPrize.setVelocityY(300);
-      holdingObject = false;
-      attachedPrize = null;
-    }
+function handleClawAction() {
+  if (!clawDropping && !clawRetracting && !holdingObject) {
+    stopDropBlink();
+    clawDropping = true;
+  } else if (holdingObject) {
+    fallingGroup.add(attachedPrize);
+    attachedPrize.setVelocityY(300);
+    holdingObject = false;
+    attachedPrize = null;
   }
+}
 
   function update() {
     if (victory) return;
@@ -192,6 +283,7 @@ function create() {
       clawHitbox.y -= 3;
       if (claw.y <= 50) {
         clawRetracting = false;
+        startDropBlink(this);
       }
     }
 
