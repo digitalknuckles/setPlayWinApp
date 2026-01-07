@@ -58,6 +58,7 @@
   let dropButton, leftMoveButton, rightMoveButton;
   let dropBlinkTween;
   let clawCable;
+  let gameActive = false;
 
   function preload() {
     this.load.image('background', 'https://magenta-broad-orca-873.mypinata.cloud/ipfs/bafybeigsjjbs6njnjsbx4t3kfwmvwzjn4mlt67crjcoc7qg5ismmysnfnq');
@@ -101,8 +102,10 @@ function create() {
   }
 
   startMenuImage = this.add.image(400, 300, 'startMenu').setDepth(20);
+  
   startMenuImage.setInteractive().on('pointerdown', () => {
   startMenuImage.setVisible(false);
+  gameActive = true;
   startDropBlink(this);
 });
 
@@ -135,6 +138,7 @@ escButton.on('pointerdown', () => {
 });
 
   function resetToStartMenu() {
+  gameActive = false;
   victory = false;
   clawDropping = false;
   clawRetracting = false;
@@ -184,9 +188,20 @@ dropButton = this.add.text(400, controlY, 'DROP', {
 }).setOrigin(0.5).setInteractive().setDepth(21);
 
 dropButton.on('pointerdown', () => {
-  if (!startMenuImage.visible) handleClawAction();
+ if (gameActive) handleClawAction();
 });
 
+dropButton.setInteractive({ useHandCursor: true });
+
+function stopDropBlink() {
+  if (dropBlinkTween) {
+    dropBlinkTween.stop();
+    dropBlinkTween = null;
+  }
+  dropButton.setAlpha(1);
+  dropButton.input.enabled = true;
+}
+  
 // RIGHT BUTTON
 rightMoveButton = this.add.text(400 + spacing, controlY, '▶', {
   fontSize: '32px',
@@ -234,13 +249,15 @@ rightMoveButton
     moveRight = false;
     overlay.setTexture('overlay_idle');
   });
-  this.input.keyboard.on('keydown-SPACE', () => {
-    if (startMenuImage && startMenuImage.visible) {
-      startMenuImage.setVisible(false);
-      return;
-    }
-    handleClawAction();
-  });
+this.input.keyboard.on('keydown-SPACE', () => {
+  if (!gameActive) {
+    startMenuImage.setVisible(false);
+    gameActive = true;
+    startDropBlink(this);
+    return;
+  }
+  handleClawAction();
+});
   this.input.keyboard.on('keydown-ESC', () => {
     if (!quitPopup) showQuitPopup();
   });
@@ -249,6 +266,8 @@ rightMoveButton
 }
 
 function handleClawAction() {
+  if (!gameActive) return;
+
   if (!clawDropping && !clawRetracting && !holdingObject) {
     stopDropBlink();
     clawDropping = true;
